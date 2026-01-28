@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bqvu1vqvqr06s"]
+[gd_scene load_steps=19 format=4 uid="uid://bqvu1vqvqr06s"]
 
 [ext_resource type="PackedScene" uid="uid://dmovamfv4fqes" path="res://entities/player.tscn" id="1_bmxgx"]
 [ext_resource type="TileSet" uid="uid://c4qxw2jd0a776" path="res://tiles/terrain.tres" id="2_ry6l7"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://swwcnfexgxfq" path="res://entities/levelend.tscn" id="10_d18o5"]
 [ext_resource type="Texture2D" uid="uid://dj6hmyqhydkfy" path="res://sprites/Seasonal Tilesets/5 - Misc. universal tiles/distant-water.png" id="10_ytc0w"]
 [ext_resource type="PackedScene" uid="uid://c27sgxxjgpndc" path="res://entities/skeleton.tscn" id="11_t8vtq"]
+[ext_resource type="PackedScene" uid="uid://cg6tu755f4sar" path="res://ui/pause_menu.tscn" id="15_xnncp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7xb8y"]
 animations = [{
@@ -135,7 +136,7 @@ limit_bottom = 438
 
 [node name="levelend" parent="." instance=ExtResource("10_d18o5")]
 position = Vector2(872, 172)
-next_level = "forest"
+next_level = "winter_world"
 
 [node name="CollisionShape2D" parent="levelend" index="0"]
 position = Vector2(-1, -27)
@@ -150,6 +151,8 @@ collision_mask = 6
 [node name="CollisionShape2D" type="CollisionShape2D" parent="limit"]
 position = Vector2(-11, 119.5)
 shape = SubResource("RectangleShape2D_ei81g")
+
+[node name="pause_menu" parent="." instance=ExtResource("15_xnncp")]
 
 [editable path="tilemaps/movingPlataform"]
 [editable path="levelend"]

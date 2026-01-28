@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://br7iakxdxbjpa"]
+
+[ext_resource type="FontFile" uid="uid://dt4pf7sggwy8l" path="res://ui/at01.ttf" id="1_p038y"]
+[ext_resource type="Texture2D" uid="uid://d1ynhxksue150" path="res://ui/control.png" id="1_w88t6"]
+[ext_resource type="Script" uid="uid://bldn6iolmw3yj" path="res://scripts/image_control.gd" id="2_256aa"]
+[ext_resource type="Theme" uid="uid://ciriy4f6qo1my" path="res://ui/pause_menu.tres" id="3_f3eo4"]
+[ext_resource type="Texture2D" uid="uid://bp4m0d74lamgi" path="res://sprites/1 - Penguin/Surprised (16 x 16).png" id="4_w88t6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_w88t6"]
+font = ExtResource("1_p038y")
+font_size = 30
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_f3eo4"]
+font = ExtResource("1_p038y")
+font_size = 30
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 6.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_w88t6")
+expand_mode = 5
+stretch_mode = 6
+script = ExtResource("2_256aa")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+offset_left = 156.0
+offset_top = 200.0
+offset_right = 209.0
+offset_bottom = 224.0
+theme = ExtResource("3_f3eo4")
+theme_override_fonts/font = ExtResource("1_p038y")
+theme_override_font_sizes/font_size = 11
+text = "RETURN"
+icon = ExtResource("4_w88t6")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 270.0
+offset_top = 45.0
+offset_right = 319.0
+offset_bottom = 69.0
+text = "JUMP"
+label_settings = SubResource("LabelSettings_w88t6")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 270.0
+offset_top = 86.0
+offset_right = 313.0
+offset_bottom = 110.0
+text = "LEFT"
+label_settings = SubResource("LabelSettings_f3eo4")
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 270.0
+offset_top = 127.0
+offset_right = 323.0
+offset_bottom = 151.0
+text = "RIGHT"
+label_settings = SubResource("LabelSettings_f3eo4")
+
+[node name="Label4" type="Label" parent="."]
+layout_mode = 0
+offset_left = 270.0
+offset_top = 166.0
+offset_right = 315.0
+offset_bottom = 190.0
+text = "DUCK"
+label_settings = SubResource("LabelSettings_f3eo4")
+
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

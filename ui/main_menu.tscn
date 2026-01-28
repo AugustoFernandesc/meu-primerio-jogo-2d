@@ -1,0 +1,92 @@
+[gd_scene load_steps=10 format=3 uid="uid://ccsd3vbfbtrhw"]
+
+[ext_resource type="Script" uid="uid://bepf7sxfjxjsa" path="res://scripts/main_menu.gd" id="1_ei257"]
+[ext_resource type="FontFile" uid="uid://dt4pf7sggwy8l" path="res://ui/at01.ttf" id="1_rmr83"]
+[ext_resource type="Texture2D" uid="uid://c06w3lx0bor0x" path="res://sprites/1 - Penguin/Standing (16 x 16).png" id="2_8uxxo"]
+[ext_resource type="Texture2D" uid="uid://cp4y6k14rlqdj" path="res://sprites/1 - Penguin/Wall_Grab (16x16).png" id="3_ei257"]
+[ext_resource type="Texture2D" uid="uid://bi1ogbcxo240y" path="res://sprites/1 - Penguin/Looking_Off (16 x 16).png" id="4_p8ri8"]
+[ext_resource type="Theme" uid="uid://ciriy4f6qo1my" path="res://ui/pause_menu.tres" id="4_ubpvv"]
+[ext_resource type="Texture2D" uid="uid://ebq2ulbv8pmh" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/_Complete_static_BG_(288 x 208).png" id="5_8uxxo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ubpvv"]
+line_spacing = 10.0
+font = ExtResource("1_rmr83")
+font_size = 35
+font_color = Color(0.17641911, 0.17641908, 0.17641908, 1)
+outline_size = 7
+
+[sub_resource type="LabelSettings" id="LabelSettings_ei257"]
+font = ExtResource("1_rmr83")
+font_size = 8
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[node name="main_menu" type="MarginContainer"]
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+script = ExtResource("1_ei257")
+
+[node name="Label" type="Label" parent="."]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Zenith's Journey"
+label_settings = SubResource("LabelSettings_ubpvv")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 2
+texture = ExtResource("5_8uxxo")
+expand_mode = 2
+
+[node name="Container" type="VBoxContainer" parent="."]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 5
+
+[node name="play" type="Button" parent="Container"]
+layout_mode = 2
+theme = ExtResource("4_ubpvv")
+theme_override_fonts/font = ExtResource("1_rmr83")
+theme_override_font_sizes/font_size = 16
+text = "PLAY"
+icon = ExtResource("2_8uxxo")
+
+[node name="control" type="Button" parent="Container"]
+layout_mode = 2
+theme = ExtResource("4_ubpvv")
+theme_override_fonts/font = ExtResource("1_rmr83")
+theme_override_font_sizes/font_size = 16
+text = "CONTROL
+"
+icon = ExtResource("3_ei257")
+
+[node name="exit" type="Button" parent="Container"]
+layout_mode = 2
+theme = ExtResource("4_ubpvv")
+theme_override_fonts/font = ExtResource("1_rmr83")
+theme_override_font_sizes/font_size = 16
+text = "EXIT
+"
+icon = ExtResource("4_p8ri8")
+
+[node name="credits" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "Developed by Augusto Fernandes"
+label_settings = SubResource("LabelSettings_ei257")
+
+[connection signal="pressed" from="Container/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Container/control" to="." method="_on_control_pressed"]
+[connection signal="pressed" from="Container/exit" to="." method="_on_exit_pressed"]

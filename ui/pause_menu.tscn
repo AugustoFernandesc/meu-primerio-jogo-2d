@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://cg6tu755f4sar"]
+
+[ext_resource type="FontFile" uid="uid://dt4pf7sggwy8l" path="res://ui/at01.ttf" id="1_50142"]
+[ext_resource type="Theme" uid="uid://ciriy4f6qo1my" path="res://ui/pause_menu.tres" id="1_ejwgg"]
+[ext_resource type="Script" uid="uid://d2yk0177aggjb" path="res://scripts/pause_menu.gd" id="1_fob5h"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_fob5h"]
+action = &"quit"
+
+[sub_resource type="Shortcut" id="Shortcut_avurv"]
+events = [SubResource("InputEventAction_fob5h")]
+
+[node name="pause_menu" type="CanvasLayer"]
+process_mode = 3
+visible = false
+script = ExtResource("1_fob5h")
+
+[node name="bg_overlay" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.23529412)
+
+[node name="menu_holder" type="VBoxContainer" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -27.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="resume" type="Button" parent="menu_holder"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_ejwgg")
+theme_override_fonts/font = ExtResource("1_50142")
+theme_override_font_sizes/font_size = 20
+shortcut = SubResource("Shortcut_avurv")
+text = "RESUME"
+
+[node name="quit" type="Button" parent="menu_holder"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_ejwgg")
+theme_override_fonts/font = ExtResource("1_50142")
+theme_override_font_sizes/font_size = 20
+text = "EXIT TO MENU"
+
+[connection signal="pressed" from="menu_holder/resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="menu_holder/quit" to="." method="_on_quit_pressed"]
