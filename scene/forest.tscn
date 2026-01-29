@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://8ru7tt58ppl7"]
+[gd_scene load_steps=31 format=4 uid="uid://8ru7tt58ppl7"]
 
 [ext_resource type="PackedScene" uid="uid://dmovamfv4fqes" path="res://entities/player.tscn" id="1_e2knd"]
 [ext_resource type="TileSet" uid="uid://c4qxw2jd0a776" path="res://tiles/terrain.tres" id="2_2xpkg"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://c27sgxxjgpndc" path="res://entities/skeleton.tscn" id="16_0xhum"]
 [ext_resource type="PackedScene" uid="uid://d1p5eydg1xnl" path="res://entities/broken_block.tscn" id="18_cwbpd"]
 [ext_resource type="PackedScene" uid="uid://cg6tu755f4sar" path="res://ui/pause_menu.tscn" id="20_dki5c"]
+[ext_resource type="PackedScene" uid="uid://wyw3quke2ad4" path="res://entities/coin.tscn" id="21_cvgm6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gwku7"]
 texture = ExtResource("3_jxvlp")
@@ -231,7 +232,7 @@ tile_set = SubResource("TileSet_64es3")
 tile_map_data = PackedByteArray("AAA3AAsAAQADAAUAAAA=")
 tile_set = SubResource("TileSet_kuygm")
 
-[node name="lava" type="TileMapLayer" parent="tilemaps" groups=["lethalArea"]]
+[node name="lava" type="TileMapLayer" parent="tilemaps" groups=["lava", "lethalArea"]]
 z_index = 2
 tile_map_data = PackedByteArray("AAAUAAoAAAAAAAAAAAAUAAsAAAAAAAEAAAAVAAoAAAAAAAAAAAAVAAsAAAAAAAEAAAAWAAoAAAAAAAAAAAAWAAsAAAAAAAEAAAAXAAoAAAAAAAAAAAAXAAsAAAAAAAEAAAAYAAoAAAAAAAAAAAAYAAsAAAAAAAEAAAATAAoAAAAAAAAAAAATAAsAAAAAAAEAAAAZAAoAAAAAAAAAAAAZAAsAAAAAAAEAAAA=")
 tile_set = ExtResource("8_p7yhu")
@@ -332,6 +333,17 @@ position = Vector2(411, 130)
 position = Vector2(164, 154)
 
 [node name="pause_menu" parent="." instance=ExtResource("20_dki5c")]
+
+[node name="coins" type="Node2D" parent="."]
+
+[node name="coin" parent="coins" instance=ExtResource("21_cvgm6")]
+position = Vector2(575, 148)
+
+[node name="coin2" parent="coins" instance=ExtResource("21_cvgm6")]
+position = Vector2(670, 162)
+
+[node name="coin3" parent="coins" instance=ExtResource("21_cvgm6")]
+position = Vector2(640, 116)
 
 [editable path="tilemaps/movingPlataform"]
 [editable path="levelend"]

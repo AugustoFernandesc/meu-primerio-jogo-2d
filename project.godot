@@ -28,6 +28,7 @@ player=""
 lethalArea=""
 enemies=""
 water=""
+lava=""
 
 [input]
 
@@ -81,6 +82,7 @@ quit={
 2d_physics/layer_4="level_end"
 2d_physics/layer_5="lethal_area"
 2d_physics/layer_6="underWater"
+2d_physics/layer_7="items"
 
 [rendering]
 

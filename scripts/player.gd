@@ -9,6 +9,7 @@ enum player_state{
 	slide,
 	wall,
 	swimming,
+	knock_back,
 	dead
 }
 
@@ -19,6 +20,7 @@ enum player_state{
 @onready var left_wall_detector: RayCast2D = $leftWallDetector
 @onready var right_wall_detector: RayCast2D = $rightWallDetector
 
+@export var player_life = 5
 @export var max_speed = 110.0
 @export var acceleration = 100
 @export var deceleration = 100
@@ -28,12 +30,14 @@ enum player_state{
 @export var water_max_speed = 100
 @export var water_acceleration = 100 
 @export var water_jump_force = -100
+@export var knockback_vector = Vector2.ZERO
 
 const JUMP_VELOCITY = -300.0
 var jump_count = 0
 @export var max_jump_count = 2
 var direction = 0
 var status: player_state
+var is_invincible: bool = false
 
 
 func _ready() -> void:
@@ -58,6 +62,8 @@ func _physics_process(delta: float) -> void:
 			wall_state(delta)
 		player_state.swimming:
 			swimming_state(delta)
+		player_state.knock_back:
+			knock_back_state(delta)
 		player_state.dead:
 			dead_state(delta)
 	move_and_slide()
@@ -106,6 +112,30 @@ func go_to_swimming_state():
 	status = player_state.swimming
 	anim.play("swimming")
 	velocity.y = min(velocity.y, 150)
+
+func go_to_knock_back_state(force: Vector2, duration: float = 0.25):
+	if status == player_state.dead or is_invincible: 
+		return
+	is_invincible = true
+	status = player_state.knock_back
+	anim.play("knock_back")
+	player_life -= 1
+	if player_life <= 0:
+		go_to_dead_state()
+		return
+	velocity = force
+	var knock_tween = create_tween()
+	anim.modulate = Color(1, 0, 0, 1)
+	knock_tween.tween_property(anim, "modulate", Color(1, 1, 1, 1), duration)
+	knock_tween.tween_callback(finish_knockback)
+	get_tree().create_timer(1.0).timeout.connect(func(): is_invincible = false)
+	var flash_tween = create_tween().set_loops(5)
+	flash_tween.tween_property(anim, "modulate:a", 0.5, 0.1)
+	flash_tween.tween_property(anim, "modulate:a", 1.0, 0.1)
+
+func finish_knockback():
+	if status != player_state.dead:
+		go_to_idle_state()
 
 func go_to_dead_state():
 	if status == player_state.dead:
@@ -222,6 +252,10 @@ func swimming_state(delta):
 	if Input.is_action_just_pressed("jump"):
 		velocity.y = water_jump_force
 
+func knock_back_state(delta):
+	apply_gravity(delta)
+	velocity.x = move_toward(velocity.x, 0, deceleration * delta)
+
 func dead_state(delta):
 	apply_gravity(delta)
 
@@ -269,13 +303,16 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemies"):
 		hit_enemy(area)
 	elif area.is_in_group("lethalArea"):
-		hit_lethal_area()
+		hit_lethal_area(area)
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("lethalArea"):
-		go_to_dead_state()
+		go_to_knock_back_state(Vector2(0, -200))
 	elif body.is_in_group("water"):
 		go_to_swimming_state()
+	if body.is_in_group("lava"):
+		is_invincible = false
+		go_to_knock_back_state(Vector2(0, -200))
 
 func _on_hitbox_body_exited(body: Node2D) -> void:
 	if body.is_in_group("water"):
@@ -288,11 +325,25 @@ func hit_enemy(area: Area2D):
 		area.get_parent().take_damage()
 		go_to_jump_state()
 	else:
-		#player dead
-		go_to_dead_state()
+		var difference = global_position.x - area.global_position.x
+		var push_direction = 0
+		if difference > 0:
+			push_direction = 1 
+		else:
+			push_direction = -1
+		go_to_knock_back_state(Vector2(push_direction * 250, -200))
 
-func hit_lethal_area():
-	go_to_dead_state()
+func hit_lethal_area(area: Area2D):
+	if area:
+		var difference = global_position.x - area.global_position.x
+		var push_direction = 0
+		if difference > 0:
+			push_direction = 1 
+		else:
+			push_direction = -1
+		go_to_knock_back_state(Vector2(push_direction * 250, -200))
+	else:
+		go_to_knock_back_state(Vector2(0, -200))
 
 func _on_reload_timer_timeout() -> void:
 	get_tree().reload_current_scene()
