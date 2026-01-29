@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0gwo5ryoof80"]
+
+[ext_resource type="PackedScene" uid="uid://wyw3quke2ad4" path="res://entities/interactables/coin.tscn" id="1_2m7fa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qt6oa"]
+radius = 9.0
+
+[node name="coin_rigid" type="RigidBody2D"]
+collision_layer = 0
+lock_rotation = true
+
+[node name="coin" parent="." instance=ExtResource("1_2m7fa")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qt6oa")
+debug_color = Color(0.96019214, 0, 0.5201233, 0.41960785)

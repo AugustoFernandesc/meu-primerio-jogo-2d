@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://df5jipr45p8fd"]
+[gd_scene load_steps=15 format=4 uid="uid://df5jipr45p8fd"]
 
 [ext_resource type="PackedScene" uid="uid://dmovamfv4fqes" path="res://entities/player.tscn" id="1_3kscr"]
 [ext_resource type="TileSet" uid="uid://c4qxw2jd0a776" path="res://tiles/terrain.tres" id="2_dm3bm"]
@@ -11,7 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://irdniibgdeim" path="res://entities/camera.tscn" id="9_5evsw"]
 [ext_resource type="PackedScene" uid="uid://swwcnfexgxfq" path="res://entities/levelend.tscn" id="10_d4ph7"]
 [ext_resource type="PackedScene" uid="uid://cg6tu755f4sar" path="res://ui/pause_menu.tscn" id="11_dm3bm"]
-[ext_resource type="PackedScene" uid="uid://wyw3quke2ad4" path="res://entities/coin.tscn" id="12_wgvfe"]
+[ext_resource type="PackedScene" uid="uid://wyw3quke2ad4" path="res://entities/interactables/coin.tscn" id="12_wgvfe"]
+[ext_resource type="PackedScene" uid="uid://d1p5eydg1xnl" path="res://entities/interactables/broken_block.tscn" id="13_tcqb0"]
+[ext_resource type="PackedScene" uid="uid://cc33erjqx7dux" path="res://entities/interactables/break_box.tscn" id="14_u35md"]
 
 [node name="grassland" type="Node2D"]
 
@@ -99,3 +101,9 @@ next_level = "forest"
 
 [node name="coin" parent="coins" instance=ExtResource("12_wgvfe")]
 position = Vector2(100, 192)
+
+[node name="brokenBlock" parent="." instance=ExtResource("13_tcqb0")]
+position = Vector2(70, 131)
+
+[node name="break_box" parent="." instance=ExtResource("14_u35md")]
+position = Vector2(120, 161)

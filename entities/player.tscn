@@ -298,12 +298,11 @@ shape = SubResource("CapsuleShape2D_u3f3p")
 z_index = 1
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_ef06p")
-animation = &"knock_back"
-frame_progress = 1.0
+animation = &"idle"
 
 [node name="hitbox" type="Area2D" parent="."]
 collision_layer = 2
-collision_mask = 52
+collision_mask = 180
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(0, 0.25)

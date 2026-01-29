@@ -83,6 +83,7 @@ quit={
 2d_physics/layer_5="lethal_area"
 2d_physics/layer_6="underWater"
 2d_physics/layer_7="items"
+2d_physics/layer_8="interactables"
 
 [rendering]
 

@@ -15,12 +15,12 @@
 [ext_resource type="Texture2D" uid="uid://duc888fegic27" path="res://sprites/Seasonal Tilesets/2 - Autumn Forest/Background parts/1 - Leaf_top.png" id="8_gwku7"]
 [ext_resource type="TileSet" uid="uid://dsxpykil5e700" path="res://tiles/lava.tres" id="8_p7yhu"]
 [ext_resource type="PackedScene" uid="uid://irdniibgdeim" path="res://entities/camera.tscn" id="9_jo4av"]
-[ext_resource type="PackedScene" path="res://entities/moving_plataform.tscn" id="9_ysu3w"]
+[ext_resource type="PackedScene" uid="uid://cj3mp57jxeika" path="res://entities/interactables/moving_plataform.tscn" id="9_ysu3w"]
 [ext_resource type="PackedScene" uid="uid://swwcnfexgxfq" path="res://entities/levelend.tscn" id="15_boiax"]
 [ext_resource type="PackedScene" uid="uid://c27sgxxjgpndc" path="res://entities/skeleton.tscn" id="16_0xhum"]
-[ext_resource type="PackedScene" uid="uid://d1p5eydg1xnl" path="res://entities/broken_block.tscn" id="18_cwbpd"]
+[ext_resource type="PackedScene" uid="uid://d1p5eydg1xnl" path="res://entities/interactables/broken_block.tscn" id="18_cwbpd"]
 [ext_resource type="PackedScene" uid="uid://cg6tu755f4sar" path="res://ui/pause_menu.tscn" id="20_dki5c"]
-[ext_resource type="PackedScene" uid="uid://wyw3quke2ad4" path="res://entities/coin.tscn" id="21_cvgm6"]
+[ext_resource type="PackedScene" uid="uid://wyw3quke2ad4" path="res://entities/interactables/coin.tscn" id="21_cvgm6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gwku7"]
 texture = ExtResource("3_jxvlp")
