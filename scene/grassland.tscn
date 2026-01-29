@@ -16,7 +16,7 @@
 [node name="grassland" type="Node2D"]
 
 [node name="player" parent="." instance=ExtResource("1_3kscr")]
-position = Vector2(34, 109)
+position = Vector2(78, 192)
 
 [node name="tiles" type="Node2D" parent="."]
 
