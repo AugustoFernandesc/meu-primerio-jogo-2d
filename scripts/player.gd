@@ -20,7 +20,6 @@ enum player_state{
 @onready var left_wall_detector: RayCast2D = $leftWallDetector
 @onready var right_wall_detector: RayCast2D = $rightWallDetector
 
-@export var player_life = 5
 @export var max_speed = 110.0
 @export var acceleration = 100
 @export var deceleration = 100
@@ -41,6 +40,7 @@ var is_invincible: bool = false
 
 
 func _ready() -> void:
+	Globals.player_life = 5
 	go_to_idle_state()
 
 func _physics_process(delta: float) -> void:
@@ -114,24 +114,27 @@ func go_to_swimming_state():
 	velocity.y = min(velocity.y, 150)
 
 func go_to_knock_back_state(force: Vector2, duration: float = 0.25):
-	if status == player_state.dead or is_invincible: 
+	if status == player_state.dead:
 		return
-	is_invincible = true
 	status = player_state.knock_back
 	anim.play("knock_back")
-	player_life -= 1
-	if player_life <= 0:
-		go_to_dead_state()
-		return
 	velocity = force
-	var knock_tween = create_tween()
-	anim.modulate = Color(1, 0, 0, 1)
-	knock_tween.tween_property(anim, "modulate", Color(1, 1, 1, 1), duration)
-	knock_tween.tween_callback(finish_knockback)
-	get_tree().create_timer(1.0).timeout.connect(func(): is_invincible = false)
-	var flash_tween = create_tween().set_loops(5)
-	flash_tween.tween_property(anim, "modulate:a", 0.5, 0.1)
-	flash_tween.tween_property(anim, "modulate:a", 1.0, 0.1)
+	if not is_invincible:
+		is_invincible = true
+		Globals.player_life -= 1
+		if Globals.player_life <= 0:
+			go_to_dead_state()
+			return
+		var knock_tween = create_tween()
+		anim.modulate = Color(1, 0, 0, 1)
+		knock_tween.tween_property(anim, "modulate", Color(1, 1, 1, 1), duration)
+		knock_tween.tween_callback(finish_knockback)
+		get_tree().create_timer(0.5).timeout.connect(func(): is_invincible = false)
+		var flash_tween = create_tween().set_loops(5)
+		flash_tween.tween_property(anim, "modulate:a", 0.5, 0.1)
+		flash_tween.tween_property(anim, "modulate:a", 1.0, 0.1)
+	else:
+		get_tree().create_timer(duration).timeout.connect(finish_knockback)
 
 func finish_knockback():
 	if status != player_state.dead:
@@ -313,6 +316,10 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("lava"):
 		is_invincible = false
 		go_to_knock_back_state(Vector2(0, -200))
+	if body.is_in_group("spikes"):
+		var direc = 1 if global_position.x > body.global_position.x else -1
+		go_to_knock_back_state(Vector2(300 * direc, -400))
+		return
 	if body.has_method("break_sprite"):
 		if velocity.y < 0:
 			body.hit_points -= 1
@@ -323,7 +330,6 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		if body.hit_points < 0:
 			body.break_sprite()
 		body.create_coin()
-	
 
 func _on_hitbox_body_exited(body: Node2D) -> void:
 	if body.is_in_group("water"):
@@ -357,4 +363,5 @@ func hit_lethal_area(area: Area2D):
 		go_to_knock_back_state(Vector2(0, -200))
 
 func _on_reload_timer_timeout() -> void:
+	Globals.reset_game()
 	get_tree().reload_current_scene()

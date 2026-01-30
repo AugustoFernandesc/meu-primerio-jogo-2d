@@ -84,7 +84,7 @@ func attack_state(_delta):
 
 func dead_state(_delta):
 	pass
-	
+
 func take_damage():
 	go_to_dead_state()
 
@@ -98,3 +98,6 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if anim.animation == "attack":
 		go_to_walk_state()
 		return
+	if anim.animation == "dead":
+		Globals.score += 100
+		queue_free()

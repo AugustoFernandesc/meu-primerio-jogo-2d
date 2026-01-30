@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.5", "Mobile")
 [autoload]
 
 DialogManager="*res://singletons/dialog_manager.gd"
+Globals="*res://singletons/globals.gd"
 
 [display]
 

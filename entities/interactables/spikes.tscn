@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bp2w4dafq5c0c"]
+
+[ext_resource type="Script" uid="uid://c44b6vy360lvx" path="res://scripts/spikes.gd" id="1_2bnuc"]
+[ext_resource type="Texture2D" uid="uid://dgnuqia0bvqxd" path="res://sprites/Mini FX, Items & UI/Mini UI/Spike.png" id="1_xvknr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mgli7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2bnuc"]
+
+[node name="spikes" type="Node2D"]
+script = ExtResource("1_2bnuc")
+
+[node name="spikes_image" type="Sprite2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("1_xvknr")
+region_enabled = true
+region_rect = Rect2(0, 8, 176, 8)
+
+[node name="spikes-area" type="StaticBody2D" parent="." groups=["lethalArea", "spikes"]]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="spikes-area"]
+shape = SubResource("RectangleShape2D_mgli7")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_2bnuc")
+debug_color = Color(0.7592451, 0.33347243, 0.7799522, 0.41960785)
