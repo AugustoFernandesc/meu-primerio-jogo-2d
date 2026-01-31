@@ -1,16 +1,66 @@
-[gd_scene load_steps=3 format=3 uid="uid://swwcnfexgxfq"]
+[gd_scene load_steps=7 format=3 uid="uid://swwcnfexgxfq"]
 
 [ext_resource type="Script" uid="uid://iucii3ayd2td" path="res://scripts/levelend.gd" id="1_4yein"]
+[ext_resource type="Texture2D" uid="uid://onlfdmwsdnqw" path="res://sprites/Mini FX, Items & UI/Food Items/Sushi_Variety (16 x 16).png" id="2_s8uu7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_61535"]
+
+[sub_resource type="Animation" id="Animation_s8uu7"]
+resource_name = "float"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SushiVariety:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5028119, 0.9923219),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -4), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_n7svg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SushiVariety:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_47dhj"]
+_data = {
+&"RESET": SubResource("Animation_n7svg"),
+&"float": SubResource("Animation_s8uu7")
+}
 
 [node name="levelend" type="Area2D"]
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_4yein")
 
+[node name="SushiVariety" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+texture = ExtResource("2_s8uu7")
+region_enabled = true
+region_rect = Rect2(48, 4, 16, 12)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_61535")
 debug_color = Color(0.59794474, 0.3713904, 1, 0.41960785)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_47dhj")
+}
+autoplay = "float"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

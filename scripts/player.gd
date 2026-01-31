@@ -38,9 +38,13 @@ var direction = 0
 var status: player_state
 var is_invincible: bool = false
 
-
 func _ready() -> void:
-	Globals.player_life = 5
+	Globals.player = self
+	if Globals.has_checkpoint:
+		await get_tree().process_frame 
+		global_position = Globals.current_checkpoint_pos 
+	else:
+		Globals.player_life = 5
 	go_to_idle_state()
 
 func _physics_process(delta: float) -> void:
@@ -143,10 +147,10 @@ func finish_knockback():
 func go_to_dead_state():
 	if status == player_state.dead:
 		return
-	
 	status = player_state.dead
 	anim.play("dead")
 	velocity.x = 0
+	hitbox_collision.set_deferred("disabled", true)
 	reaload_timer.start()
 
 func idle_state(delta):
@@ -363,5 +367,10 @@ func hit_lethal_area(area: Area2D):
 		go_to_knock_back_state(Vector2(0, -200))
 
 func _on_reload_timer_timeout() -> void:
-	Globals.reset_game()
-	get_tree().reload_current_scene()
+	if Globals.player_life > 0:
+		get_tree().reload_current_scene()
+	else:
+		Globals.reset_game()
+		# Se você quiser que o Game Over tire ele do Checkpoint:
+		# Globals.has_checkpoint = false
+		get_tree().reload_current_scene()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=4 uid="uid://df5jipr45p8fd"]
+[gd_scene load_steps=20 format=4 uid="uid://df5jipr45p8fd"]
 
 [ext_resource type="PackedScene" uid="uid://dmovamfv4fqes" path="res://entities/player.tscn" id="1_3kscr"]
 [ext_resource type="TileSet" uid="uid://c4qxw2jd0a776" path="res://tiles/terrain.tres" id="2_dm3bm"]
 [ext_resource type="TileSet" uid="uid://d0wu3p6lqb5m8" path="res://tiles/decoration.tres" id="3_wgvfe"]
 [ext_resource type="Texture2D" uid="uid://dp4bg3p3m1w5p" path="res://sprites/Seasonal Tilesets/1 - Grassland/Background parts/5 - Sky_color.png" id="4_tcqb0"]
+[ext_resource type="PackedScene" uid="uid://42pnwi3h6s0w" path="res://entities/checkpoint.tscn" id="5_d4ph7"]
 [ext_resource type="Texture2D" uid="uid://bq8eapu0w84ho" path="res://sprites/Seasonal Tilesets/1 - Grassland/Background parts/4 - Cloud_cover_2.png" id="5_u35md"]
 [ext_resource type="Texture2D" uid="uid://tkqu0yl1k5ky" path="res://sprites/Seasonal Tilesets/1 - Grassland/Background parts/3 - Cloud_cover_1.png" id="6_mrqkn"]
 [ext_resource type="Texture2D" uid="uid://0a2ch65gsb37" path="res://sprites/Seasonal Tilesets/1 - Grassland/Background parts/2 - Hills.png" id="7_ut6yh"]
@@ -37,6 +38,9 @@ tile_set = ExtResource("2_dm3bm")
 [node name="decoration" type="TileMapLayer" parent="tiles"]
 tile_map_data = PackedByteArray("AAAZAAwAAQABAAUAAAAaAAsAAQAFAAEAAAAbAAwAAQABAAUAAAAcAAwAAQAFAAUAAAAdAAwAAQAGAAUAAAAeAAwAAQAGAAUAAAAfAAoABAAAAAAAAAAfAAwAAQAGAAUAAAAgAAwAAQAGAAUAAAAhAAwAAQAGAAUAAAAiAAwAAQAHAAUAAAAkAAsAAgAFAAIAAAABAAsAAQADAAUAAAAHAAoAAQAJAAEAAAA=")
 tile_set = ExtResource("3_wgvfe")
+
+[node name="checkpoint" parent="tiles" instance=ExtResource("5_d4ph7")]
+position = Vector2(660, 156)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

@@ -229,7 +229,6 @@ tile_map_data = PackedByteArray("AAAsAAoAAAAFAAUAAAAsAAkAAAAFAAUAAAArAAkAAAADAAI
 tile_set = SubResource("TileSet_64es3")
 
 [node name="decoration" type="TileMapLayer" parent="tilemaps"]
-tile_map_data = PackedByteArray("AAA3AAsAAQADAAUAAAA=")
 tile_set = SubResource("TileSet_kuygm")
 
 [node name="lava" type="TileMapLayer" parent="tilemaps" groups=["lava", "lethalArea"]]
@@ -319,8 +318,11 @@ limit_right = 901
 position = Vector2(96, 187)
 next_level = "tropic"
 
-[node name="CollisionShape2D" parent="levelend" index="0"]
-position = Vector2(816, -51)
+[node name="AnimatedSprite2D" parent="levelend" index="0"]
+position = Vector2(793, -22)
+
+[node name="CollisionShape2D" parent="levelend" index="1"]
+position = Vector2(793, -51)
 shape = SubResource("RectangleShape2D_0xhum")
 
 [node name="skeleton" parent="." instance=ExtResource("16_0xhum")]
