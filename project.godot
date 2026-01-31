@@ -89,6 +89,8 @@ advance_message={
 2d_physics/layer_6="underWater"
 2d_physics/layer_7="items"
 2d_physics/layer_8="interactables"
+2d_physics/layer_9="hitbox_enemy"
+2d_physics/layer_10="hurt_box"
 
 [rendering]
 

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://s0wrnvxcf0g7" path="res://sprites/Mini FX, Items & UI/Mini UI/Speech_Emotes (16 x 16).png" id="3_1yr7v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f46l0"]
-size = Vector2(22, 20)
+size = Vector2(22, 18)
 
 [node name="warning_sign" type="Node2D"]
 script = ExtResource("1_f46l0")
@@ -25,4 +25,5 @@ region_rect = Rect2(0, 0, 16, 16)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="area_sign"]
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_f46l0")
