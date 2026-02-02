@@ -318,9 +318,6 @@ limit_right = 901
 position = Vector2(96, 187)
 next_level = "tropic"
 
-[node name="AnimatedSprite2D" parent="levelend" index="0"]
-position = Vector2(793, -22)
-
 [node name="CollisionShape2D" parent="levelend" index="1"]
 position = Vector2(793, -51)
 shape = SubResource("RectangleShape2D_0xhum")

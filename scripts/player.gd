@@ -19,6 +19,7 @@ enum player_state{
 @onready var hitbox_collision: CollisionShape2D = $hitbox/CollisionShape2D
 @onready var left_wall_detector: RayCast2D = $leftWallDetector
 @onready var right_wall_detector: RayCast2D = $rightWallDetector
+@onready var jump_sfx: AudioStreamPlayer = $jump_sfx
 
 @export var max_speed = 110.0
 @export var acceleration = 100
@@ -83,6 +84,7 @@ func go_to_walk_state():
 func go_to_jump_state():
 	status = player_state.jump
 	anim.play("jump")
+	jump_sfx.play()
 	velocity.y = JUMP_VELOCITY
 	jump_count += 1
 
@@ -371,6 +373,6 @@ func _on_reload_timer_timeout() -> void:
 		get_tree().reload_current_scene()
 	else:
 		Globals.reset_game()
-		# Se você quiser que o Game Over tire ele do Checkpoint:
+		# Se quiser que o Game Over tire ele do Checkpoint:
 		# Globals.has_checkpoint = false
 		get_tree().reload_current_scene()

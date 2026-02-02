@@ -5,6 +5,8 @@ const coin_instance = preload("res://entities/interactables/coin_rigid.tscn")
 
 @onready var anim: AnimationPlayer = $anim
 @onready var spawn_coin: Marker2D = $spawn_coin
+@onready var hit_box: AudioStreamPlayer = $hit_box
+@onready var box_falling: AudioStreamPlayer = $box_falling
 @export var pieces: PackedStringArray
 @export var hit_points = 3
 var impulse = 200
@@ -16,6 +18,10 @@ func break_sprite():
 		piece_instance.get_node("texture").texture = load(pieces[piece])
 		piece_instance.global_position = global_position
 		piece_instance.apply_impulse(Vector2(randi_range(-impulse, impulse), randi_range(-impulse, -impulse * 2)))
+	visible = false
+	set_collision_layer_value(1, false)
+	box_falling.play()
+	await box_falling.finished
 	queue_free()
 
 func create_coin():
@@ -25,4 +31,5 @@ func create_coin():
 	coin.apply_impulse(Vector2(randi_range(-50,50), -150))
 
 func take_hit():
+	hit_box.play()
 	anim.play("hit")

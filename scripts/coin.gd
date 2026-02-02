@@ -1,6 +1,7 @@
 extends Area2D
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var coin_sfx: AudioStreamPlayer = $coin_sfx
 
 var coins = 10 
 
@@ -12,6 +13,7 @@ func _process(_delta: float) -> void:
 
 func _on_body_entered(_body: Node2D) -> void:
 	anim.play("collect")
+	coin_sfx.play()
 	await $CollisionShape2D.call_deferred("queue_free")
 	Globals.coins += coins
 

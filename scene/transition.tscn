@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bh7y4480xg26v"]
+
+[ext_resource type="Shader" uid="uid://04ks6cfy8igq" path="res://shaders/transition.gdshader" id="1_hpshh"]
+[ext_resource type="Script" uid="uid://x6ehi4y4vd38" path="res://scripts/transition.gd" id="1_rwd3a"]
+[ext_resource type="Script" uid="uid://cvpfosjnvvi28" path="res://scripts/color_react.gd" id="2_pywll"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pywll"]
+shader = ExtResource("1_hpshh")
+shader_parameter/progress = 0.0
+
+[node name="transition" type="CanvasLayer"]
+script = ExtResource("1_rwd3a")
+
+[node name="color_react" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_pywll")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("2_pywll")
+metadata/_edit_use_anchors_ = true

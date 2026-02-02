@@ -12,14 +12,11 @@ func set_direction(skeleton_direction):
 	direction = skeleton_direction
 	anim.flip_h = direction < 0
 
-
 func _on_self_destruction_timer_timeout() -> void:
 	queue_free()
 
-
 func _on_area_entered(_area: Area2D) -> void:
 	queue_free()
-
 
 func _on_body_entered(_body: Node2D) -> void:
 	queue_free()
