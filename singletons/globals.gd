@@ -5,10 +5,10 @@ var score = 0
 var player_life = 3
 var player_hp = 3
 var max_hp = 3
-
 var player = null
 var current_checkpoint_pos = Vector2.ZERO
 var has_checkpoint = false
+var items_collect = []
 
 func reset_game():
 	coins = 0
@@ -21,3 +21,6 @@ func reset_game():
 func respawn_player():
 	if has_checkpoint and player != null:
 		player.global_position = current_checkpoint_pos
+
+func reset_items_temp():
+	items_collect.clear()

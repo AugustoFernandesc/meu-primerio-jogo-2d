@@ -1,6 +1,7 @@
 [gd_scene load_steps=20 format=4 uid="uid://bqvu1vqvqr06s"]
 
 [ext_resource type="PackedScene" uid="uid://dmovamfv4fqes" path="res://entities/player.tscn" id="1_bmxgx"]
+[ext_resource type="Script" uid="uid://ctsm7ihydjw5v" path="res://scripts/tropic.gd" id="1_mjtd1"]
 [ext_resource type="TileSet" uid="uid://c4qxw2jd0a776" path="res://tiles/terrain.tres" id="2_ry6l7"]
 [ext_resource type="TileSet" uid="uid://d0wu3p6lqb5m8" path="res://tiles/decoration.tres" id="3_ry6l7"]
 [ext_resource type="Texture2D" uid="uid://c2gsmogkrhktx" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/5 - Sky_color.png" id="4_34ia6"]
@@ -15,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://dj6hmyqhydkfy" path="res://sprites/Seasonal Tilesets/5 - Misc. universal tiles/distant-water.png" id="10_ytc0w"]
 [ext_resource type="PackedScene" uid="uid://c27sgxxjgpndc" path="res://entities/skeleton.tscn" id="11_t8vtq"]
 [ext_resource type="PackedScene" uid="uid://cg6tu755f4sar" path="res://ui/pause_menu.tscn" id="15_xnncp"]
-[ext_resource type="AudioStream" uid="uid://d3ijopowx5pjv" path="res://sons/843679__josefpres__piano-loops-202-octave-down-short-loop-120-bpm.ogg" id="16_mjtd1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7xb8y"]
 animations = [{
@@ -38,6 +38,7 @@ size = Vector2(20, 93)
 size = Vector2(20, 141)
 
 [node name="tropic" type="Node2D"]
+script = ExtResource("1_mjtd1")
 
 [node name="player" parent="." instance=ExtResource("1_bmxgx")]
 position = Vector2(36, 173)
@@ -154,10 +155,6 @@ position = Vector2(-11, 119.5)
 shape = SubResource("RectangleShape2D_ei81g")
 
 [node name="pause_menu" parent="." instance=ExtResource("15_xnncp")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("16_mjtd1")
-autoplay = true
 
 [editable path="tilemaps/movingPlataform"]
 [editable path="levelend"]

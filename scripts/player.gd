@@ -328,14 +328,14 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		return
 	if body.has_method("break_sprite"):
 		if velocity.y < 0:
-			body.hit_points -= 1
 			if body.has_method("take_hit"):
 				body.take_hit()
-			velocity.y = 0
-			go_to_fall_state()
+				body.create_coin()
+				if velocity.y < 0:
+					velocity.y = 0
+					go_to_fall_state()
 		if body.hit_points < 0:
 			body.break_sprite()
-		body.create_coin()
 
 func _on_hitbox_body_exited(body: Node2D) -> void:
 	if body.is_in_group("water"):

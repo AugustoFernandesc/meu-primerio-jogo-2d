@@ -1,5 +1,6 @@
 [gd_scene load_steps=19 format=4 uid="uid://cgnh63yv6xr0s"]
 
+[ext_resource type="Script" uid="uid://csk7or85ce76k" path="res://scripts/winter_world.gd" id="1_4uvnb"]
 [ext_resource type="PackedScene" uid="uid://dmovamfv4fqes" path="res://entities/player.tscn" id="1_8ekk4"]
 [ext_resource type="Texture2D" uid="uid://dfefqrhxs0cc1" path="res://sprites/Seasonal Tilesets/4 - Winter World/Background parts/3 - Big_mountain_BG.png" id="1_m273m"]
 [ext_resource type="Texture2D" uid="uid://ckctbhk1e7kba" path="res://sprites/Seasonal Tilesets/4 - Winter World/Background parts/2 - Smaller_mountains.png" id="2_ydf8m"]
@@ -17,9 +18,9 @@
 [ext_resource type="PackedScene" uid="uid://c27sgxxjgpndc" path="res://entities/skeleton.tscn" id="15_sfu3o"]
 [ext_resource type="PackedScene" uid="uid://db2c4k2oyuy2w" path="res://entities/cherry.tscn" id="16_x3odr"]
 [ext_resource type="PackedScene" uid="uid://8wi5ov5t345m" path="res://entities/rocket_cherry.tscn" id="17_4uvnb"]
-[ext_resource type="AudioStream" uid="uid://doo8ui86cd2w3" path="res://sons/843488__josefpres__piano-loops-199-octave-up-long-loop-120-bpm.ogg" id="18_4uvnb"]
 
 [node name="winter-world" type="Node2D"]
+script = ExtResource("1_4uvnb")
 
 [node name="player" parent="." instance=ExtResource("1_8ekk4")]
 position = Vector2(2347, 165)
@@ -193,10 +194,6 @@ position = Vector2(5998, 337)
 [node name="cherry" parent="enemies" instance=ExtResource("16_x3odr")]
 
 [node name="rocket_cherry" parent="enemies" instance=ExtResource("17_4uvnb")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("18_4uvnb")
-autoplay = true
 
 [editable path="spikes/spikes"]
 [editable path="spikes/spikes2"]

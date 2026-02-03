@@ -1,6 +1,7 @@
 [gd_scene load_steps=32 format=4 uid="uid://8ru7tt58ppl7"]
 
 [ext_resource type="PackedScene" uid="uid://dmovamfv4fqes" path="res://entities/player.tscn" id="1_e2knd"]
+[ext_resource type="Script" uid="uid://s4khlngktm46" path="res://scripts/forest.gd" id="1_xw4on"]
 [ext_resource type="TileSet" uid="uid://c4qxw2jd0a776" path="res://tiles/terrain.tres" id="2_2xpkg"]
 [ext_resource type="Texture2D" uid="uid://be10vix1aks8i" path="res://sprites/Seasonal Tilesets/2 - Autumn Forest/Background parts/6 - Distant_trees.png" id="3_gbfvw"]
 [ext_resource type="Texture2D" uid="uid://najc1clwq8dr" path="res://sprites/Seasonal Tilesets/2 - Autumn Forest/Terrain (16 x 16).png" id="3_jxvlp"]
@@ -21,7 +22,6 @@
 [ext_resource type="PackedScene" uid="uid://d1p5eydg1xnl" path="res://entities/interactables/broken_block.tscn" id="18_cwbpd"]
 [ext_resource type="PackedScene" uid="uid://cg6tu755f4sar" path="res://ui/pause_menu.tscn" id="20_dki5c"]
 [ext_resource type="PackedScene" uid="uid://wyw3quke2ad4" path="res://entities/interactables/coin.tscn" id="21_cvgm6"]
-[ext_resource type="AudioStream" uid="uid://btb038jwuk4fx" path="res://sons/842951__josefpres__piano-loops-200-efect-octave-long-loop-120-bpm.ogg" id="22_kuygm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gwku7"]
 texture = ExtResource("3_jxvlp")
@@ -213,6 +213,7 @@ pattern_0 = SubResource("TileMapPattern_xlg7c")
 size = Vector2(20, 112)
 
 [node name="forest" type="Node2D"]
+script = ExtResource("1_xw4on")
 metadata/_edit_vertical_guides_ = [900.0]
 
 [node name="player" parent="." instance=ExtResource("1_e2knd")]
@@ -344,10 +345,6 @@ position = Vector2(670, 162)
 
 [node name="coin3" parent="coins" instance=ExtResource("21_cvgm6")]
 position = Vector2(640, 116)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("22_kuygm")
-autoplay = true
 
 [editable path="tilemaps/movingPlataform"]
 [editable path="levelend"]

@@ -74,6 +74,7 @@ collision_layer = 128
 collision_mask = 2
 script = ExtResource("1_b5u08")
 pieces = PackedStringArray("res://sprites/block breaking/brick-piece-01.png", "res://sprites/block breaking/brick-piece-02.png", "res://sprites/block breaking/brick-piece-03.png", "res://sprites/block breaking/brick-piece-04.png")
+hit_points = 4
 
 [node name="texture" type="Sprite2D" parent="."]
 texture = ExtResource("1_vl7yn")
@@ -89,7 +90,8 @@ libraries = {
 }
 
 [node name="spawn_coin" type="Marker2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -7)
+gizmo_extents = 6.0
 
 [node name="hit_box" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_odpk3")

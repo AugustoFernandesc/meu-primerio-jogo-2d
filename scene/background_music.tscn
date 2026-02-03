@@ -1,8 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://lcsbngs7yulf"]
 
-[ext_resource type="AudioStream" path="res://sons/566208__awazixosh__its-time-for-an-adventure.wav" id="1_g1dms"]
+[ext_resource type="Script" uid="uid://dooxflymlsgo2" path="res://scripts/background_music.gd" id="1_g1dms"]
 
 [node name="background_music" type="AudioStreamPlayer"]
-stream = ExtResource("1_g1dms")
-volume_db = -13.0
 autoplay = true
+script = ExtResource("1_g1dms")

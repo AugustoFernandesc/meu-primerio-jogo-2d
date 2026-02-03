@@ -1,6 +1,11 @@
 extends Area2D
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@export var id_single: String
+
+func _ready() -> void:
+	if Globals.items_collect.has(id_single):
+		queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
@@ -13,7 +18,8 @@ func _on_body_entered(body: Node2D) -> void:
 		else:
 			Globals.player_hp += 1
 			coletar_item()
-
+		Globals.items_collect.append(id_single)
+		queue_free()
 func coletar_item():
 	$CollisionShape2D.set_deferred("disabled", true)
 	if anim.sprite_frames.has_animation("collected"):
