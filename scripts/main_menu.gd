@@ -1,6 +1,7 @@
 extends MarginContainer
 
 func _on_play_pressed() -> void:
+	Globals.reset_game()
 	get_tree().change_scene_to_file("res://scene/grassland.tscn")
 
 func _on_exit_pressed() -> void:

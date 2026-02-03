@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://bohbpkw7vg4rp"]
+
+[ext_resource type="Texture2D" uid="uid://bqoqdvmduhln1" path="res://sprites/Seasonal Tilesets/1 - Grassland/Grassland_entities (16 x 16).png" id="1_sq3tw"]
+[ext_resource type="FontFile" uid="uid://dt4pf7sggwy8l" path="res://ui/at01.ttf" id="2_rwsqr"]
+
+[node name="tutorial_sign" type="Node2D"]
+
+[node name="plate" type="Sprite2D" parent="."]
+texture = ExtResource("1_sq3tw")
+region_enabled = true
+region_rect = Rect2(48, 80, 16, 16)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -69.0
+offset_top = -102.0
+offset_right = 70.0
+offset_bottom = -9.0
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_rwsqr")
+text = "[A][D] - MOVER
+ [W] - PULAR
+ [S] - SLIDE
+[I] - LER PLACA
+[O] - PASSAR MENSAGEM
+ (Pule na parede para escalar!)"
+horizontal_alignment = 1

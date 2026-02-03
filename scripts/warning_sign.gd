@@ -3,9 +3,11 @@ extends Node2D
 @onready var area_sign: Area2D = $area_sign
 
 const lines: Array[String] = [
-	"Seja bem-vindo!",
-	"Tente nao morrer",
-	"no primeiro buraco.",
+	"BEM-VINDO, ZENITH!",
+	"[A][D] ou [SETAS]: Mover",
+	"[W] ou [ESPAÇO]: Pular (2x para Pulo Duplo)",
+	"[S] (em movimento): Slide / Deslizar",
+	"[S] (parado): Agachar",
 ]
 
 func _unhandled_input(event: InputEvent) -> void:

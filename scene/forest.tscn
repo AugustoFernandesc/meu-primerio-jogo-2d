@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://8ru7tt58ppl7"]
+[gd_scene load_steps=32 format=4 uid="uid://8ru7tt58ppl7"]
 
 [ext_resource type="PackedScene" uid="uid://dmovamfv4fqes" path="res://entities/player.tscn" id="1_e2knd"]
 [ext_resource type="TileSet" uid="uid://c4qxw2jd0a776" path="res://tiles/terrain.tres" id="2_2xpkg"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://d1p5eydg1xnl" path="res://entities/interactables/broken_block.tscn" id="18_cwbpd"]
 [ext_resource type="PackedScene" uid="uid://cg6tu755f4sar" path="res://ui/pause_menu.tscn" id="20_dki5c"]
 [ext_resource type="PackedScene" uid="uid://wyw3quke2ad4" path="res://entities/interactables/coin.tscn" id="21_cvgm6"]
+[ext_resource type="AudioStream" uid="uid://btb038jwuk4fx" path="res://sons/842951__josefpres__piano-loops-200-efect-octave-long-loop-120-bpm.ogg" id="22_kuygm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gwku7"]
 texture = ExtResource("3_jxvlp")
@@ -343,6 +344,10 @@ position = Vector2(670, 162)
 
 [node name="coin3" parent="coins" instance=ExtResource("21_cvgm6")]
 position = Vector2(640, 116)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_kuygm")
+autoplay = true
 
 [editable path="tilemaps/movingPlataform"]
 [editable path="levelend"]

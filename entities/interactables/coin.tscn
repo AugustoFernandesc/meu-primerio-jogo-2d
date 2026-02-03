@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://v7r5klgvaoff" path="res://scripts/coin.gd" id="1_a182a"]
 [ext_resource type="Texture2D" uid="uid://s4af6313mhf2" path="res://sprites/Mini FX, Items & UI/Common Pick-ups/Coin (16 x 16).png" id="1_cg25x"]
 [ext_resource type="Texture2D" uid="uid://1ly154625808" path="res://sprites/Mini FX, Items & UI/Effects/Yellow_Sparkle (16 x 16).png" id="2_e0yd8"]
-[ext_resource type="AudioStream" uid="uid://dovpgw6ysg1pc" path="res://sons/402767__lilmati__retro-coin-03.wav" id="4_7lj0t"]
+[ext_resource type="AudioStream" uid="uid://88mtbe6aa3bt" path="res://sons/402767__lilmati__retro-coin-03.ogg" id="4_7lj0t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r21wx"]
 atlas = ExtResource("2_e0yd8")

@@ -45,7 +45,7 @@ func _ready() -> void:
 		await get_tree().process_frame 
 		global_position = Globals.current_checkpoint_pos 
 	else:
-		Globals.player_life = 5
+		Globals.player_life = 3
 	go_to_idle_state()
 
 func _physics_process(delta: float) -> void:
@@ -127,8 +127,8 @@ func go_to_knock_back_state(force: Vector2, duration: float = 0.25):
 	velocity = force
 	if not is_invincible:
 		is_invincible = true
-		Globals.player_life -= 1
-		if Globals.player_life <= 0:
+		Globals.player_hp -= 1
+		if Globals.player_hp <= 0:
 			go_to_dead_state()
 			return
 		var knock_tween = create_tween()
@@ -369,10 +369,14 @@ func hit_lethal_area(area: Area2D):
 		go_to_knock_back_state(Vector2(0, -200))
 
 func _on_reload_timer_timeout() -> void:
+	Globals.player_life -= 1
 	if Globals.player_life > 0:
+		Globals.player_hp = 3
+		Globals.coins = 0
+		Globals.score = 0
 		get_tree().reload_current_scene()
 	else:
 		Globals.reset_game()
 		# Se quiser que o Game Over tire ele do Checkpoint:
 		# Globals.has_checkpoint = false
-		get_tree().reload_current_scene()
+		get_tree().change_scene_to_file("res://ui/game_over.tscn")

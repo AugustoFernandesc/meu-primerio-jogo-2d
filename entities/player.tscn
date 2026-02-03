@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://ctrolwexwnijx" path="res://sprites/1 - Penguin/Swimming (16 x 16).png" id="9_dchgp"]
 [ext_resource type="Texture2D" uid="uid://cp4y6k14rlqdj" path="res://sprites/1 - Penguin/Wall_Grab (16x16).png" id="10_x08pd"]
 [ext_resource type="Texture2D" uid="uid://cjgp0k7306l4" path="res://sprites/1 - Penguin/Wall_Slide (16x16).png" id="11_dchgp"]
-[ext_resource type="AudioStream" uid="uid://bmeg0kaaqj67a" path="res://sons/458641__lilmati__retro-jump-02.wav" id="13_kdgjc"]
+[ext_resource type="AudioStream" uid="uid://dd1mevlg3d6cu" path="res://sons/458641__lilmati__retro-jump-02.ogg" id="13_kdgjc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u3f3p"]
 radius = 6.0

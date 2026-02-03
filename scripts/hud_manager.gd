@@ -4,6 +4,7 @@ extends Control
 @onready var score_counter: Label = $container/score_container/score_counter
 @onready var coins_counter: Label = $container_coins/coins_container/coins_icons/coins_counter
 @onready var life_counter: Label = $container_coins/life_container/life_icons/life_counter
+@onready var hp_counter: Label = $hp_container/hp_icons/hp_counter
 @onready var clock_timer: Timer = $clock_timer
 
 var minutes = 0
@@ -16,6 +17,7 @@ signal time_is_up()
 func _ready() -> void:
 	coins_counter.text = str("%04d" % Globals.coins)
 	score_counter.text = str("%06d" % Globals.score)
+	hp_counter.text = str("%02d" % Globals.player_hp)
 	life_counter.text = str("%02d" % Globals.player_life)
 	timer_counter.text = str("%02d" % default_minutes) + ":" + str("%02d" % default_seconds)
 	reset_clock_timer()
@@ -23,6 +25,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	coins_counter.text = str("%04d" % Globals.coins)
 	score_counter.text = str("%06d" % Globals.score)
+	hp_counter.text = str("%02d" % Globals.player_hp)
 	life_counter.text = str("%02d" % Globals.player_life)
 	if minutes == 0  and seconds == 0:
 		clock_timer.stop()

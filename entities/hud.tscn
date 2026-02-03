@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://eou3t2nicjbj"]
+[gd_scene load_steps=10 format=3 uid="uid://eou3t2nicjbj"]
 
 [ext_resource type="Script" uid="uid://b4abgkfg4typt" path="res://scripts/hud_manager.gd" id="1_agiu6"]
 [ext_resource type="Texture2D" uid="uid://dgfvrh8yg3sch" path="res://sprites/Mini FX, Items & UI/Common Pick-ups/Coin-Sprites/00_Coin-Sprites.png" id="1_jqn4v"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bstuh08nhmt8u" path="res://sprites/Mini FX, Items & UI/Common Pick-ups/Coin-Sprites/03_Coin-Sprites.png" id="4_i51r8"]
 [ext_resource type="Texture2D" uid="uid://bqk1o2cr2dpdw" path="res://sprites/Mini FX, Items & UI/Mini UI/Health_Indicator_Black_Outline (8 x 8).png" id="5_jqn4v"]
 [ext_resource type="FontFile" uid="uid://dt4pf7sggwy8l" path="res://ui/at01.ttf" id="5_ko5hl"]
+[ext_resource type="Texture2D" uid="uid://6hip5nepmh4l" path="res://sprites/Mini FX, Items & UI/Mini UI/Health_Indicator_White_Outline (8 x 8).png" id="8_i51r8"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_u6mqm"]
 frames = 4
@@ -146,7 +147,35 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("5_ko5hl")
 theme_override_font_sizes/font_size = 15
-text = " 05"
+text = " 03"
+vertical_alignment = 1
+
+[node name="hp_container" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 194.0
+offset_right = 51.0
+offset_bottom = 202.0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="hp_icons" type="TextureRect" parent="Control/hp_container"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("8_i51r8")
+
+[node name="hp_counter" type="Label" parent="Control/hp_container/hp_icons"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = -5.0
+offset_right = 29.0
+offset_bottom = 13.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("5_ko5hl")
+theme_override_font_sizes/font_size = 15
+text = " 03"
 vertical_alignment = 1
 
 [connection signal="timeout" from="Control/clock_timer" to="Control" method="_on_clock_timer_timeout"]
