@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://kwyj40w3upcr"]
+
+[ext_resource type="Script" uid="uid://cvfwy4m0ek6lg" path="res://scripts/ice_cream.gd" id="1_10p88"]
+[ext_resource type="Texture2D" uid="uid://clm00jppxe150" path="res://sprites/Mini FX, Items & UI/Food Items/Ice_Cream_Cones (16 x 16).png" id="2_k6beu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lua52"]
+radius = 9.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw21g"]
+atlas = ExtResource("2_k6beu")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2cmn"]
+atlas = ExtResource("2_k6beu")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptvbc"]
+atlas = ExtResource("2_k6beu")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4sif"]
+atlas = ExtResource("2_k6beu")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s064r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw21g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l2cmn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptvbc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4sif")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ice_cream" type="Area2D"]
+collision_layer = 64
+collision_mask = 2
+script = ExtResource("1_10p88")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lua52")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_s064r")
+autoplay = "default"
+frame_progress = 0.6204222
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dmovamfv4fqes"]
+[gd_scene load_steps=54 format=3 uid="uid://dmovamfv4fqes"]
 
 [ext_resource type="Script" uid="uid://l3aysu5cvfah" path="res://scripts/player.gd" id="1_rfe5m"]
 [ext_resource type="Texture2D" uid="uid://de16bklsxe3vq" path="res://sprites/1 - Penguin/Hurt (16 x 16).png" id="2_ef06p"]
@@ -10,9 +10,12 @@
 [ext_resource type="Texture2D" uid="uid://4tw68m4nax2k" path="res://sprites/1 - Penguin/Waddling (16 x 16).png" id="4_qsoyl"]
 [ext_resource type="Texture2D" uid="uid://cihlb0pnrsvt6" path="res://sprites/1 - Penguin/Belly_Sliding (16 x 16).png" id="6_6nm46"]
 [ext_resource type="Texture2D" uid="uid://ctrolwexwnijx" path="res://sprites/1 - Penguin/Swimming (16 x 16).png" id="9_dchgp"]
+[ext_resource type="Texture2D" uid="uid://b5thocclg6kc6" path="res://sprites/1 - Penguin/Victory_Dance (16 x 16).png" id="10_oprnr"]
 [ext_resource type="Texture2D" uid="uid://cp4y6k14rlqdj" path="res://sprites/1 - Penguin/Wall_Grab (16x16).png" id="10_x08pd"]
 [ext_resource type="Texture2D" uid="uid://cjgp0k7306l4" path="res://sprites/1 - Penguin/Wall_Slide (16x16).png" id="11_dchgp"]
-[ext_resource type="AudioStream" uid="uid://dd1mevlg3d6cu" path="res://sons/458641__lilmati__retro-jump-02.ogg" id="13_kdgjc"]
+[ext_resource type="AudioStream" uid="uid://dd1mevlg3d6cu" path="res://sons/jump.ogg" id="13_kdgjc"]
+[ext_resource type="AudioStream" uid="uid://dcsrj71th7c4k" path="res://sons/damage.ogg" id="14_q0i8f"]
+[ext_resource type="AudioStream" uid="uid://cdfaq0hl8dvko" path="res://sons/water.ogg" id="15_0i614"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u3f3p"]
 radius = 6.0
@@ -89,6 +92,26 @@ region = Rect2(32, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_egchw"]
 atlas = ExtResource("9_dchgp")
 region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sn2x3"]
+atlas = ExtResource("10_oprnr")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y10x8"]
+atlas = ExtResource("10_oprnr")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1sc42"]
+atlas = ExtResource("10_oprnr")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0t50q"]
+atlas = ExtResource("10_oprnr")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qcl2"]
+atlas = ExtResource("10_oprnr")
+region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kdgjc"]
 atlas = ExtResource("4_qsoyl")
@@ -238,6 +261,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_sn2x3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y10x8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1sc42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0t50q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5qcl2")
+}],
+"loop": false,
+"name": &"victory_dance",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_kdgjc")
 }, {
 "duration": 1.0,
@@ -299,7 +342,9 @@ shape = SubResource("CapsuleShape2D_u3f3p")
 z_index = 1
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_ef06p")
-animation = &"idle"
+animation = &"victory_dance"
+frame = 4
+frame_progress = 1.0
 
 [node name="hitbox" type="Area2D" parent="."]
 collision_layer = 2
@@ -323,6 +368,16 @@ target_position = Vector2(7, 0)
 [node name="jump_sfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_kdgjc")
 volume_db = -40.0
+
+[node name="damage_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_q0i8f")
+volume_db = -15.0
+pitch_scale = 7.0
+
+[node name="water_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_0i614")
+volume_db = -25.0
+pitch_scale = 2.73
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

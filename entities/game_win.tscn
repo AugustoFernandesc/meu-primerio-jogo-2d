@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4e2ve34hh3f5"]
+
+[ext_resource type="Script" uid="uid://dvddsi3atnawi" path="res://scripts/game_win.gd" id="1_oktn2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w5pxd"]
+size = Vector2(20, 31)
+
+[node name="game_win" type="Area2D"]
+collision_layer = 128
+collision_mask = 2
+script = ExtResource("1_oktn2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5.5)
+shape = SubResource("RectangleShape2D_w5pxd")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

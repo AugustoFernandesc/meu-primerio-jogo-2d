@@ -24,7 +24,7 @@ MusicPlayer="*res://scripts/background_music.gd"
 
 window/size/viewport_width=288
 window/size/viewport_height=208
-window/size/mode=3
+window/size/mode=1
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
@@ -89,7 +89,7 @@ advance_message={
 2d_physics/layer_5="lethal_area"
 2d_physics/layer_6="underWater"
 2d_physics/layer_7="items"
-2d_physics/layer_8="interactables"
+2d_physics/layer_8="game_win"
 2d_physics/layer_9="hitbox_enemy"
 2d_physics/layer_10="hurt_box"
 

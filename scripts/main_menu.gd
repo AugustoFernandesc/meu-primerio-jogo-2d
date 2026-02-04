@@ -1,7 +1,11 @@
 extends MarginContainer
 
+@onready var menu_sfx: AudioStreamPlayer = $menu_sfx
+
 func _ready() -> void:
 	MusicPlayer.stop()
+	menu_sfx.play()
+	Globals.is_timer_active = false
 
 func _on_play_pressed() -> void:
 	Globals.reset_game()

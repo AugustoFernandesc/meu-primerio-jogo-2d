@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c3x2a4cr5tyou" path="res://scripts/break_box.gd" id="1_b5u08"]
 [ext_resource type="Texture2D" uid="uid://dur8r020a8guw" path="res://sprites/Seasonal Tilesets/5 - Misc. universal tiles/Blocks (16 x 16).png" id="1_vl7yn"]
-[ext_resource type="AudioStream" uid="uid://csln1iw3inylm" path="res://sons/566685__njjjjjjjjjjjjjjjjjjjjjjjj__tap-on-shoulder.ogg" id="3_odpk3"]
-[ext_resource type="AudioStream" uid="uid://bkxxkk0h6lh3d" path="res://sons/678861__al-whit__box-falling.ogg" id="4_ykhap"]
+[ext_resource type="AudioStream" uid="uid://csln1iw3inylm" path="res://sons/tap_box.ogg" id="3_odpk3"]
+[ext_resource type="AudioStream" uid="uid://bkxxkk0h6lh3d" path="res://sons/box-falling.ogg" id="4_ykhap"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b5u08"]
 size = Vector2(16, 16)

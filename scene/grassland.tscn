@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://df5jipr45p8fd"]
+[gd_scene load_steps=24 format=4 uid="uid://df5jipr45p8fd"]
 
 [ext_resource type="PackedScene" uid="uid://dmovamfv4fqes" path="res://entities/player.tscn" id="1_3kscr"]
 [ext_resource type="Script" uid="uid://ciaiuj3eblo8x" path="res://scripts/grassland.gd" id="1_tco1r"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://db2c4k2oyuy2w" path="res://entities/cherry.tscn" id="18_5evsw"]
 [ext_resource type="PackedScene" uid="uid://bohbpkw7vg4rp" path="res://ui/control.tscn" id="20_xxt1f"]
 [ext_resource type="PackedScene" uid="uid://b7amedbi13p11" path="res://entities/interactables/life.tscn" id="21_wip23"]
+[ext_resource type="PackedScene" uid="uid://kwyj40w3upcr" path="res://entities/interactables/ice_cream.tscn" id="23_tco1r"]
 
 [node name="grassland" type="Node2D"]
 script = ExtResource("1_tco1r")
@@ -145,3 +146,6 @@ position = Vector2(158, 130)
 [node name="life" parent="." instance=ExtResource("21_wip23")]
 position = Vector2(631, 190)
 id_single = "life_phase1"
+
+[node name="ice_cream" parent="." instance=ExtResource("23_tco1r")]
+position = Vector2(703, 124)

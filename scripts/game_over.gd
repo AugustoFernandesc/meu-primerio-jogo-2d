@@ -1,7 +1,10 @@
 extends Control
 
+@onready var game_over_sfx: AudioStreamPlayer = $game_over_sfx
+
 func _ready() -> void:
 	MusicPlayer.stop()
+	game_over_sfx.play()
 
 func _on_restart_btn_pressed() -> void:
 	Globals.reset_items_temp()

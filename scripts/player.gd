@@ -10,6 +10,7 @@ enum player_state{
 	wall,
 	swimming,
 	knock_back,
+	victory_dance,
 	dead
 }
 
@@ -20,6 +21,8 @@ enum player_state{
 @onready var left_wall_detector: RayCast2D = $leftWallDetector
 @onready var right_wall_detector: RayCast2D = $rightWallDetector
 @onready var jump_sfx: AudioStreamPlayer = $jump_sfx
+@onready var damage_sfx: AudioStreamPlayer = $damage_sfx
+@onready var water_sfx: AudioStreamPlayer = $water_sfx
 
 @export var max_speed = 110.0
 @export var acceleration = 100
@@ -41,11 +44,10 @@ var is_invincible: bool = false
 
 func _ready() -> void:
 	Globals.player = self
+	is_invincible = false
 	if Globals.has_checkpoint:
 		await get_tree().process_frame 
-		global_position = Globals.current_checkpoint_pos 
-	else:
-		Globals.player_life = 3
+		global_position = Globals.current_checkpoint_pos
 	go_to_idle_state()
 
 func _physics_process(delta: float) -> void:
@@ -69,6 +71,8 @@ func _physics_process(delta: float) -> void:
 			swimming_state(delta)
 		player_state.knock_back:
 			knock_back_state(delta)
+		player_state.victory_dance:
+			victory_dance_state(delta)
 		player_state.dead:
 			dead_state(delta)
 	move_and_slide()
@@ -117,13 +121,15 @@ func go_to_wall_state():
 func go_to_swimming_state():
 	status = player_state.swimming
 	anim.play("swimming")
-	velocity.y = min(velocity.y, 150)
+	water_sfx.play()
+	velocity.y = min(velocity.y, 50)
 
 func go_to_knock_back_state(force: Vector2, duration: float = 0.25):
 	if status == player_state.dead:
 		return
 	status = player_state.knock_back
 	anim.play("knock_back")
+	damage_sfx.play()
 	velocity = force
 	if not is_invincible:
 		is_invincible = true
@@ -131,20 +137,31 @@ func go_to_knock_back_state(force: Vector2, duration: float = 0.25):
 		if Globals.player_hp <= 0:
 			go_to_dead_state()
 			return
-		var knock_tween = create_tween()
-		anim.modulate = Color(1, 0, 0, 1)
-		knock_tween.tween_property(anim, "modulate", Color(1, 1, 1, 1), duration)
-		knock_tween.tween_callback(finish_knockback)
-		get_tree().create_timer(0.5).timeout.connect(func(): is_invincible = false)
-		var flash_tween = create_tween().set_loops(5)
-		flash_tween.tween_property(anim, "modulate:a", 0.5, 0.1)
-		flash_tween.tween_property(anim, "modulate:a", 1.0, 0.1)
+		start_knockback_tween(duration)
+		start_flash_tween()
+		get_tree().create_timer(0.25).timeout.connect(func(): is_invincible = false)
 	else:
 		get_tree().create_timer(duration).timeout.connect(finish_knockback)
+
+func start_knockback_tween(duration):
+	var knock_tween = create_tween()
+	anim.modulate = Color(1, 0, 0, 1)
+	knock_tween.tween_property(anim, "modulate", Color(1, 1, 1, 1), duration)
+	knock_tween.tween_callback(finish_knockback)
+
+func start_flash_tween():
+	var flash_tween = create_tween().set_loops(5)
+	flash_tween.tween_property(anim, "modulate:a", 0.5, 0.1)
+	flash_tween.tween_property(anim, "modulate:a", 1.0, 0.1)
 
 func finish_knockback():
 	if status != player_state.dead:
 		go_to_idle_state()
+
+func go_to_victory_dance():
+	status = player_state.victory_dance
+	velocity = Vector2.ZERO
+	anim.play("victory_dance")
 
 func go_to_dead_state():
 	if status == player_state.dead:
@@ -208,8 +225,9 @@ func fall_state(delta):
 			go_to_walk_state()
 		return
 	if (left_wall_detector.is_colliding() or right_wall_detector.is_colliding()) and is_on_wall():
-		go_to_wall_state()
-		return
+		if Globals.has_ice_cream:
+			go_to_wall_state()
+			return
 
 func duck_state(delta):
 	apply_gravity(delta)
@@ -265,6 +283,10 @@ func knock_back_state(delta):
 	apply_gravity(delta)
 	velocity.x = move_toward(velocity.x, 0, deceleration * delta)
 
+func victory_dance_state(delta):
+	velocity.x = move_toward(velocity.x, 0, deceleration * delta)
+	apply_gravity(delta)
+
 func dead_state(delta):
 	apply_gravity(delta)
 
@@ -290,6 +312,8 @@ func update_direction():
 		anim.flip_h = false
 
 func can_jump() -> bool:
+	if not Globals.has_ice_cream and jump_count >=1:
+		return false
 	return jump_count < max_jump_count
 
 func set_small_collider():
@@ -315,12 +339,13 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		hit_lethal_area(area)
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
+	if status == player_state.dead:
+		return
 	if body.is_in_group("lethalArea"):
 		go_to_knock_back_state(Vector2(0, -200))
 	elif body.is_in_group("water"):
 		go_to_swimming_state()
-	if body.is_in_group("lava"):
-		is_invincible = false
+	elif body.is_in_group("lava"):
 		go_to_knock_back_state(Vector2(0, -200))
 	if body.is_in_group("spikes"):
 		var direc = 1 if global_position.x > body.global_position.x else -1
@@ -336,6 +361,8 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 					go_to_fall_state()
 		if body.hit_points < 0:
 			body.break_sprite()
+	if body.is_in_group("game_win"):
+		go_to_victory_dance()
 
 func _on_hitbox_body_exited(body: Node2D) -> void:
 	if body.is_in_group("water"):
@@ -345,6 +372,7 @@ func _on_hitbox_body_exited(body: Node2D) -> void:
 func hit_enemy(area: Area2D):
 	if velocity.y > 0:
 		#enemy dead
+		damage_sfx.play()
 		area.get_parent().take_damage()
 		go_to_jump_state()
 	else:
