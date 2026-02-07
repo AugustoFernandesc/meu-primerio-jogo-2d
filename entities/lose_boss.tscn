@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://cfy015iysyk64"]
+
+[ext_resource type="Script" uid="uid://bpd4nt31yxi2d" path="res://scripts/lose_boss.gd" id="1_gc83l"]
+[ext_resource type="Texture2D" uid="uid://cb66ltj7fvyx8" path="res://sprites/Sprite Pack 2/8 - Comrade Cheese Puff/Running_Away (16 x 16).png" id="1_iuv1f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gc83l"]
+atlas = ExtResource("1_iuv1f")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gx5cn"]
+atlas = ExtResource("1_iuv1f")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g70af"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gc83l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gx5cn")
+}],
+"loop": true,
+"name": &"run_away",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gc83l"]
+size = Vector2(18, 14.5)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+z_index = -3
+collision_layer = 0
+script = ExtResource("1_gc83l")
+
+[node name="lose_boss" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -15)
+sprite_frames = SubResource("SpriteFrames_g70af")
+animation = &"run_away"
+autoplay = "run_away"
+frame = 1
+frame_progress = 0.83912027
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -15.25)
+shape = SubResource("RectangleShape2D_gc83l")

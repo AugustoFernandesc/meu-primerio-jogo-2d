@@ -12,11 +12,11 @@ var items_collect = []
 var has_ice_cream = false
 var time_elapsed = 0.0 # Armazena o tempo total em segundos
 var is_timer_active = false # Para parar o tempo no menu ou na vitória
+signal boss_defeated
 
 func _process(delta: float) -> void:
 	if is_timer_active:
 		time_elapsed += delta
-		print(time_elapsed)
 
 func reset_game():
 	coins = 0

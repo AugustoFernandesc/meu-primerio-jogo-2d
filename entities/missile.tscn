@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bq058f8rijoug"]
+
+[ext_resource type="Script" uid="uid://cvysil24gywm0" path="res://scripts/missile.gd" id="1_1yef8"]
+[ext_resource type="Texture2D" uid="uid://cnybshx2jpf1g" path="res://sprites/Sprite Pack 2/8 - Comrade Cheese Puff/Missile (16 x 8).png" id="1_82cxx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1yef8"]
+size = Vector2(12, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82cxx"]
+size = Vector2(14, 4)
+
+[node name="missile" type="AnimatableBody2D" groups=["lethalArea"]]
+collision_layer = 16
+collision_mask = 3
+sync_to_physics = false
+script = ExtResource("1_1yef8")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1yef8")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_82cxx")
+
+[node name="hitbox" type="Area2D" parent="." groups=["lethalArea"]]
+collision_layer = 16
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("RectangleShape2D_82cxx")
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

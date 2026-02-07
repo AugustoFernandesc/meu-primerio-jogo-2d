@@ -23,6 +23,7 @@ enum player_state{
 @onready var jump_sfx: AudioStreamPlayer = $jump_sfx
 @onready var damage_sfx: AudioStreamPlayer = $damage_sfx
 @onready var water_sfx: AudioStreamPlayer = $water_sfx
+@onready var ceiling_detector: RayCast2D = $ceiling_detector
 
 @export var max_speed = 110.0
 @export var acceleration = 100
@@ -232,21 +233,40 @@ func fall_state(delta):
 func duck_state(delta):
 	apply_gravity(delta)
 	update_direction()
+	velocity.x = move_toward(velocity.x, 0, deceleration * delta)
+	if direction != 0:
+		go_to_slide_state()
+		return
 	if Input.is_action_just_released("duck"):
-		exit_from_duck_state()
-		go_to_idle_state()
-		return 
+		if not ceiling_detector.is_colliding():
+			exit_from_duck_state()
+			go_to_idle_state()
+			return
 
 func slide_state(delta):
 	apply_gravity(delta)
-	velocity.x = move_toward(velocity.x, 0, slide_deceleration * delta)
+	update_direction()
+	if direction != 0:
+		velocity.x = move_toward(velocity.x, direction * (max_speed * 0.8), acceleration * delta)
+	else:
+		velocity.x = move_toward(velocity.x, 0, slide_deceleration * delta)
+	
+	if Input.is_action_just_pressed("jump") and can_jump():
+		exit_from_slide_state()
+		go_to_jump_state()
+		return
 	if Input.is_action_just_released("duck"):
-		exit_from_slide_state()
-		go_to_walk_state()
-		return 
+		if not ceiling_detector.is_colliding():
+			exit_from_slide_state()
+			go_to_idle_state()
+			return 
 	if velocity.x == 0:
-		exit_from_slide_state()
-		go_to_duck_state()
+		if ceiling_detector.is_colliding():
+			exit_from_slide_state()
+			go_to_duck_state()
+		else:
+			exit_from_slide_state()
+			go_to_idle_state()
 		return
 
 func wall_state(delta):
@@ -312,8 +332,13 @@ func update_direction():
 		anim.flip_h = false
 
 func can_jump() -> bool:
-	if not Globals.has_ice_cream and jump_count >=1:
+	# Se o teto estiver colado na cabeça (passagem estreita), não pula de jeito nenhum
+	if ceiling_detector.is_colliding():
 		return false
+	
+	# Lógica normal de pulo duplo com o sorvete
+	if not Globals.has_ice_cream:
+		return jump_count < 1
 	return jump_count < max_jump_count
 
 func set_small_collider():

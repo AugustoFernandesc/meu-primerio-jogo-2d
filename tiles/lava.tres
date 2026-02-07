@@ -9,12 +9,14 @@ texture = ExtResource("1_f0g28")
 0:0/animation_frame_2/duration = 0.2
 0:0/animation_frame_3/duration = 0.2
 0:0/0 = 0
+0:0/0/z_index = 2
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -1.528799, 8, -1.528799, 8, 8, -8, 8)
 0:1/animation_frame_0/duration = 0.2
 0:1/animation_frame_1/duration = 0.2
 0:1/animation_frame_2/duration = 0.2
 0:1/animation_frame_3/duration = 0.2
 0:1/0 = 0
+0:1/0/z_index = 2
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [resource]

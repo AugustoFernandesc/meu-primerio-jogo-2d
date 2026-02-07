@@ -336,17 +336,17 @@ acceleration = 200
 deceleration = 410
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape2D_u3f3p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_ef06p")
-animation = &"victory_dance"
-frame = 4
-frame_progress = 1.0
+animation = &"idle"
 
 [node name="hitbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 180
 
@@ -361,6 +361,9 @@ one_shot = true
 
 [node name="leftWallDetector" type="RayCast2D" parent="."]
 target_position = Vector2(-7, 0)
+
+[node name="ceiling_detector" type="RayCast2D" parent="."]
+target_position = Vector2(0, -8)
 
 [node name="rightWallDetector" type="RayCast2D" parent="."]
 target_position = Vector2(7, 0)

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6segkipgnt5"]
+
+[ext_resource type="Texture2D" uid="uid://der43b7yu8faf" path="res://sprites/Sprite Pack 2/8 - Comrade Cheese Puff/Dropped_Bomb (8 x 8).png" id="1_aokfu"]
+[ext_resource type="Script" uid="uid://dhty42tqsiat5" path="res://scripts/bomb.gd" id="1_dlnre"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dlnre"]
+radius = 4.1231055
+
+[node name="bomb" type="RigidBody2D" groups=["lethalArea"]]
+collision_layer = 16
+collision_mask = 3
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_dlnre")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_dlnre")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_aokfu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
