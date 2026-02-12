@@ -215,7 +215,7 @@ script = ExtResource("1_xw4on")
 metadata/_edit_vertical_guides_ = [900.0]
 
 [node name="player" parent="." instance=ExtResource("1_e2knd")]
-position = Vector2(776, 177)
+position = Vector2(535, 170)
 
 [node name="tilemaps" type="Node" parent="."]
 
