@@ -49,6 +49,7 @@ func _ready() -> void:
 	if Globals.has_checkpoint:
 		await get_tree().process_frame 
 		global_position = Globals.current_checkpoint_pos
+		print("Player respawnado no checkpoint: ", global_position)
 	go_to_idle_state()
 
 func _physics_process(delta: float) -> void:

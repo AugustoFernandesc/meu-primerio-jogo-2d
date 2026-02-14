@@ -66,7 +66,7 @@ load_path = "res://.godot/imported/Spike.png-e5a33878ee6b918160f77038b1672bd1.ct
 script = ExtResource("1_4uvnb")
 
 [node name="player" parent="." instance=ExtResource("1_8ekk4")]
-position = Vector2(2090, 166)
+position = Vector2(2825, 152)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

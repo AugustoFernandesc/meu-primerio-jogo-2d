@@ -251,7 +251,7 @@ layout_mode = 2
 theme = ExtResource("4_ubpvv")
 theme_override_fonts/font = ExtResource("1_rmr83")
 theme_override_font_sizes/font_size = 16
-text = "CONTROL
+text = "CREDITS
 "
 icon = ExtResource("3_ei257")
 

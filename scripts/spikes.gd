@@ -4,6 +4,7 @@ extends Node2D
 @onready var solid_collision: CollisionShape2D = $"spikes-area/CollisionShape2D"
 
 func _ready():
+	solid_collision.shape = solid_collision.shape.duplicate()
 	solid_collision.shape.size = sprite.get_rect().size
 
 func _on_Area2D_body_entered(body):

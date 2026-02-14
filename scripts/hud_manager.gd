@@ -46,5 +46,10 @@ func reset_clock_timer():
 	seconds = default_seconds
 
 func _on_time_is_up() -> void:
-	Globals.reset_game()
-	get_tree().reload_current_scene()
+	Globals.player_life -= 1
+	if Globals.player_life > 0:
+		Globals.player_hp = 3 
+		get_tree().reload_current_scene()
+	else:
+		Globals.reset_game()
+		get_tree().change_scene_to_file("res://ui/game_over.tscn")
