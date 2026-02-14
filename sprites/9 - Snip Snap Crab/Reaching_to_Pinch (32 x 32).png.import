@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csjvkv7xt4fvs"
-path="res://.godot/imported/Movement_(Flip_image_back_and_forth) (32 x 32).png-1d832a6b06180522a37ee9bea6700eaa.ctex"
+uid="uid://bjss4repxmvqd"
+path="res://.godot/imported/Reaching_to_Pinch (32 x 32).png-7320a8e4367fd9eeac0dff9a87f97126.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Sprite Pack 2/9 - Snip Snap Crab/Movement_(Flip_image_back_and_forth) (32 x 32).png"
-dest_files=["res://.godot/imported/Movement_(Flip_image_back_and_forth) (32 x 32).png-1d832a6b06180522a37ee9bea6700eaa.ctex"]
+source_file="res://sprites/9 - Snip Snap Crab/Reaching_to_Pinch (32 x 32).png"
+dest_files=["res://.godot/imported/Reaching_to_Pinch (32 x 32).png-7320a8e4367fd9eeac0dff9a87f97126.ctex"]
 
 [params]
 

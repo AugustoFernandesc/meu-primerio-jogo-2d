@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjss4repxmvqd"
-path="res://.godot/imported/Reaching_to_Pinch (32 x 32).png-544919dcc13fe0c30ade29e50599ac4e.ctex"
+uid="uid://d3xkggransnm1"
+path="res://.godot/imported/Idle_(48 x 32).png-bfe0837fa49f038f0d293e5e73159be8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Sprite Pack 2/9 - Snip Snap Crab/Reaching_to_Pinch (32 x 32).png"
-dest_files=["res://.godot/imported/Reaching_to_Pinch (32 x 32).png-544919dcc13fe0c30ade29e50599ac4e.ctex"]
+source_file="res://sprites/7 - Grizzly/Idle_(48 x 32).png"
+dest_files=["res://.godot/imported/Idle_(48 x 32).png-bfe0837fa49f038f0d293e5e73159be8.ctex"]
 
 [params]
 
