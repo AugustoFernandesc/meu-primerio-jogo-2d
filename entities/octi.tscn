@@ -1,0 +1,104 @@
+[gd_scene load_steps=9 format=3 uid="uid://dgvp8eahqchuw"]
+
+[ext_resource type="Script" uid="uid://dthvmqdftor4u" path="res://scripts/octi.gd" id="1_mht07"]
+[ext_resource type="Texture2D" uid="uid://bb1cp04bs5bek" path="res://sprites/Sprite Pack 2/3 - Octi/Hurt (16 x 16).png" id="1_wh4l7"]
+[ext_resource type="Texture2D" uid="uid://d0gv2euivmjpa" path="res://sprites/Sprite Pack 2/3 - Octi/Idle_&_Movement (16 x 16).png" id="2_mht07"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_302w0"]
+atlas = ExtResource("2_mht07")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vnnh"]
+atlas = ExtResource("2_mht07")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hmcw2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wh4l7")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_302w0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vnnh")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4hhk7"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mht07"]
+radius = 9.0
+
+[node name="octi" type="CharacterBody2D" groups=["enemies"]]
+script = ExtResource("1_mht07")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hmcw2")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["water"]]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_4hhk7")
+
+[node name="hitbox" type="Area2D" parent="." groups=["enemies"]]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_mht07")
+debug_color = Color(0.98840195, 0, 0.30758548, 0.41960785)
+
+[node name="player_detector" type="RayCast2D" parent="."]
+target_position = Vector2(-90, 7)
+collision_mask = 2
+
+[node name="player_detector2" type="RayCast2D" parent="."]
+target_position = Vector2(-62, 47)
+collision_mask = 2
+
+[node name="player_detector3" type="RayCast2D" parent="."]
+target_position = Vector2(-13, 62)
+collision_mask = 2
+
+[node name="player_detector4" type="RayCast2D" parent="."]
+target_position = Vector2(33, 60)
+collision_mask = 2
+
+[node name="player_detector5" type="RayCast2D" parent="."]
+target_position = Vector2(78, 14)
+collision_mask = 2
+
+[node name="player_detector6" type="RayCast2D" parent="."]
+target_position = Vector2(80, -2)
+collision_mask = 2
+
+[node name="player_detector7" type="RayCast2D" parent="."]
+z_index = 5
+target_position = Vector2(20, -51)
+collision_mask = 2
+
+[node name="player_detector8" type="RayCast2D" parent="."]
+target_position = Vector2(-29, -47)
+collision_mask = 2
+
+[node name="player_detector9" type="RayCast2D" parent="."]
+target_position = Vector2(-86, -7)
+collision_mask = 2
+
+[node name="water_detector" type="RayCast2D" parent="." groups=["water"]]
+modulate = Color(1, 0.3019608, 1, 1)
+position = Vector2(0, 5)
+target_position = Vector2(0, 7)
+collision_mask = 32

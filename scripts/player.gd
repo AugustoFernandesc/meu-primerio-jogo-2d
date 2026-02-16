@@ -42,6 +42,7 @@ var jump_count = 0
 var direction = 0
 var status: player_state
 var is_invincible: bool = false
+var is_in_water: bool = false
 
 func _ready() -> void:
 	Globals.player = self
@@ -158,7 +159,10 @@ func start_flash_tween():
 
 func finish_knockback():
 	if status != player_state.dead:
-		go_to_idle_state()
+		if is_in_water:
+			go_to_swimming_state()
+		else:
+			go_to_idle_state()
 
 func go_to_victory_dance():
 	status = player_state.victory_dance
@@ -171,6 +175,7 @@ func go_to_dead_state():
 	status = player_state.dead
 	anim.play("dead")
 	velocity.x = 0
+	collision_layer = 0 
 	hitbox_collision.set_deferred("disabled", true)
 	reaload_timer.start()
 
@@ -370,6 +375,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("lethalArea"):
 		go_to_knock_back_state(Vector2(0, -200))
 	elif body.is_in_group("water"):
+		is_in_water = true
 		go_to_swimming_state()
 	elif body.is_in_group("lava"):
 		go_to_knock_back_state(Vector2(0, -200))
@@ -392,6 +398,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 
 func _on_hitbox_body_exited(body: Node2D) -> void:
 	if body.is_in_group("water"):
+		is_in_water = false
 		jump_count = 0
 		go_to_jump_state()
 
@@ -400,7 +407,11 @@ func hit_enemy(area: Area2D):
 		#enemy dead
 		damage_sfx.play()
 		area.get_parent().take_damage()
-		go_to_jump_state()
+		if is_in_water:
+			velocity.y = -100
+			go_to_swimming_state()
+		else:
+			go_to_jump_state()
 	else:
 		var difference = global_position.x - area.global_position.x
 		var push_direction = 0

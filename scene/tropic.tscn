@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://bqvu1vqvqr06s"]
+[gd_scene load_steps=48 format=4 uid="uid://bqvu1vqvqr06s"]
 
 [ext_resource type="PackedScene" uid="uid://dmovamfv4fqes" path="res://entities/player.tscn" id="1_bmxgx"]
 [ext_resource type="Script" uid="uid://ctsm7ihydjw5v" path="res://scripts/tropic.gd" id="1_mjtd1"]
@@ -27,6 +27,8 @@
 [ext_resource type="PackedScene" uid="uid://42pnwi3h6s0w" path="res://entities/checkpoint.tscn" id="23_hohr6"]
 [ext_resource type="PackedScene" uid="uid://bp2w4dafq5c0c" path="res://entities/interactables/spikes.tscn" id="26_ovcmj"]
 [ext_resource type="PackedScene" uid="uid://kwyj40w3upcr" path="res://entities/interactables/ice_cream.tscn" id="27_l33ao"]
+[ext_resource type="PackedScene" uid="uid://bbxftkeri7esx" path="res://entities/snip_snap_crab.tscn" id="28_4h4s8"]
+[ext_resource type="PackedScene" uid="uid://dgvp8eahqchuw" path="res://entities/octi.tscn" id="29_u8qwh"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_xlg7c"]
 tile_data = PackedInt32Array(131072, 65537, 5, 65537, 327681, 1, 131074, 65537, 5, 131075, 327681, 5, 131076, 393217, 5, 131077, 393217, 5, 6, 4, 0, 131078, 393217, 5, 131079, 393217, 5, 131080, 393217, 5, 131081, 458753, 5, 65547, 327682, 2)
@@ -404,7 +406,7 @@ position = Vector2(82, 158)
 position = Vector2(1, -149)
 
 [node name="player" parent="." instance=ExtResource("1_bmxgx")]
-position = Vector2(5643, 79)
+position = Vector2(5546, 81)
 
 [node name="tilemaps" type="Node" parent="."]
 
@@ -595,6 +597,12 @@ shape = SubResource("RectangleShape2D_ei81g")
 [node name="levelend" parent="." instance=ExtResource("10_d18o5")]
 position = Vector2(7961, 130)
 next_level = "winter_world"
+
+[node name="snip_snap_crab" parent="." instance=ExtResource("28_4h4s8")]
+position = Vector2(5649, 134)
+
+[node name="octi" parent="." instance=ExtResource("29_u8qwh")]
+position = Vector2(6009, 306)
 
 [editable path="movingPlataform"]
 [editable path="Spike/spikes"]

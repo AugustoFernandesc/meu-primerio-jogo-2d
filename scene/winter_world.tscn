@@ -18,10 +18,10 @@
 [ext_resource type="PackedScene" uid="uid://bp2w4dafq5c0c" path="res://entities/interactables/spikes.tscn" id="13_71kvn"]
 [ext_resource type="PackedScene" uid="uid://kwyj40w3upcr" path="res://entities/interactables/ice_cream.tscn" id="14_enq6x"]
 [ext_resource type="PackedScene" uid="uid://cj3mp57jxeika" path="res://entities/interactables/moving_plataform.tscn" id="14_x3odr"]
-[ext_resource type="PackedScene" uid="uid://c27sgxxjgpndc" path="res://entities/skeleton.tscn" id="15_sfu3o"]
 [ext_resource type="PackedScene" uid="uid://wyw3quke2ad4" path="res://entities/interactables/coin.tscn" id="20_vuiev"]
 [ext_resource type="PackedScene" uid="uid://b7gcc3qptbup0" path="res://singletons/warning_sign.tscn" id="21_aw11x"]
 [ext_resource type="PackedScene" uid="uid://bg26n16rfmmrx" path="res://entities/tankboy.tscn" id="22_uou7h"]
+[ext_resource type="PackedScene" uid="uid://d6dpqvoqmxip" path="res://entities/grizzly.tscn" id="23_enq6x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_enq6x"]
 texture = ExtResource("10_uou7h")
@@ -65,7 +65,7 @@ load_path = "res://.godot/imported/Spike.png-e5a33878ee6b918160f77038b1672bd1.ct
 script = ExtResource("1_4uvnb")
 
 [node name="player" parent="." instance=ExtResource("1_8ekk4")]
-position = Vector2(43, 289)
+position = Vector2(15, 310)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -248,59 +248,62 @@ position = Vector2(6345, 225)
 
 [node name="enemies" type="Node2D" parent="."]
 
-[node name="skeleton" parent="enemies" instance=ExtResource("15_sfu3o")]
-position = Vector2(1175, 160)
+[node name="grizzly" parent="enemies" instance=ExtResource("23_enq6x")]
+position = Vector2(1185, 159)
 
-[node name="skeleton2" parent="enemies" instance=ExtResource("15_sfu3o")]
-position = Vector2(1284, 159)
+[node name="grizzly2" parent="enemies" instance=ExtResource("23_enq6x")]
+position = Vector2(1279, 159)
 
-[node name="skeleton3" parent="enemies" instance=ExtResource("15_sfu3o")]
-position = Vector2(1477, 65)
+[node name="grizzly3" parent="enemies" instance=ExtResource("23_enq6x")]
+position = Vector2(1534, 63)
 
-[node name="skeleton11" parent="enemies" instance=ExtResource("15_sfu3o")]
-position = Vector2(1781, 112)
+[node name="grizzly4" parent="enemies" instance=ExtResource("23_enq6x")]
+position = Vector2(1919, 191)
 
-[node name="skeleton4" parent="enemies" instance=ExtResource("15_sfu3o")]
-position = Vector2(2749, -37)
+[node name="grizzly5" parent="enemies" instance=ExtResource("23_enq6x")]
+position = Vector2(2754, -33)
 
-[node name="skeleton5" parent="enemies" instance=ExtResource("15_sfu3o")]
-position = Vector2(2959, -31)
+[node name="grizzly6" parent="enemies" instance=ExtResource("23_enq6x")]
+position = Vector2(3036, -33)
 
-[node name="skeleton12" parent="enemies" instance=ExtResource("15_sfu3o")]
-position = Vector2(3124, 320)
+[node name="grizzly7" parent="enemies" instance=ExtResource("23_enq6x")]
+position = Vector2(3199, 319)
 
-[node name="skeleton6" parent="enemies" instance=ExtResource("15_sfu3o")]
-position = Vector2(3987, 192)
+[node name="grizzly8" parent="enemies" instance=ExtResource("23_enq6x")]
+position = Vector2(4095, 191)
 
-[node name="skeleton13" parent="enemies" instance=ExtResource("15_sfu3o")]
-position = Vector2(4420, 80)
+[node name="grizzly9" parent="enemies" instance=ExtResource("23_enq6x")]
+position = Vector2(4861, 127)
 
-[node name="skeleton7" parent="enemies" instance=ExtResource("15_sfu3o")]
-position = Vector2(5694, 224)
+[node name="grizzly10" parent="enemies" instance=ExtResource("23_enq6x")]
+position = Vector2(5390, 350)
 
-[node name="skeleton8" parent="enemies" instance=ExtResource("15_sfu3o")]
-position = Vector2(5880, 337)
+[node name="grizzly11" parent="enemies" instance=ExtResource("23_enq6x")]
+position = Vector2(5299, 351)
 
-[node name="skeleton9" parent="enemies" instance=ExtResource("15_sfu3o")]
-position = Vector2(5998, 337)
+[node name="grizzly12" parent="enemies" instance=ExtResource("23_enq6x")]
+position = Vector2(5680, 223)
 
-[node name="skeleton10" parent="enemies" instance=ExtResource("15_sfu3o")]
-position = Vector2(6532, 288)
+[node name="grizzly13" parent="enemies" instance=ExtResource("23_enq6x")]
+position = Vector2(6079, 335)
 
-[node name="skeleton14" parent="enemies" instance=ExtResource("15_sfu3o")]
-position = Vector2(7183, 336)
+[node name="grizzly14" parent="enemies" instance=ExtResource("23_enq6x")]
+position = Vector2(5952, 336)
 
-[node name="skeleton15" parent="enemies" instance=ExtResource("15_sfu3o")]
-position = Vector2(6915, 336)
+[node name="grizzly15" parent="enemies" instance=ExtResource("23_enq6x")]
+position = Vector2(7263, 335)
 
-[node name="skeleton16" parent="enemies" instance=ExtResource("15_sfu3o")]
-position = Vector2(6767, 336)
+[node name="grizzly16" parent="enemies" instance=ExtResource("23_enq6x")]
+position = Vector2(7113, 335)
 
-[node name="skeleton17" parent="enemies" instance=ExtResource("15_sfu3o")]
-position = Vector2(6637, 335)
+[node name="grizzly17" parent="enemies" instance=ExtResource("23_enq6x")]
+position = Vector2(6986, 335)
 
-[node name="skeleton18" parent="enemies" instance=ExtResource("15_sfu3o")]
-position = Vector2(7052, 337)
+[node name="grizzly18" parent="enemies" instance=ExtResource("23_enq6x")]
+position = Vector2(6840, 335)
+
+[node name="grizzly19" parent="enemies" instance=ExtResource("23_enq6x")]
+position = Vector2(6698, 335)
 
 [node name="Coins" type="Node2D" parent="."]
 
