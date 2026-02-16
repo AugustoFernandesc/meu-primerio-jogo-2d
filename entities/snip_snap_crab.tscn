@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://csjvkv7xt4fvs" path="res://sprites/9 - Snip Snap Crab/Movement_(Flip_image_back_and_forth) (32 x 32).png" id="4_0r6kl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w54r"]
-size = Vector2(22, 21)
+size = Vector2(23, 18)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2e3av"]
 animations = [{
@@ -36,15 +36,14 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5b28b"]
-size = Vector2(22, 21)
+size = Vector2(23, 18)
 
 [node name="snip_snap_crab" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 4
-collision_mask = 3
 script = ExtResource("1_qtmcy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 6.5)
+position = Vector2(0.5, 7)
 shape = SubResource("RectangleShape2D_8w54r")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -56,16 +55,24 @@ collision_layer = 4
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(1, 6.5)
+position = Vector2(0.5, 7)
 shape = SubResource("RectangleShape2D_5b28b")
 debug_color = Color(0.9285944, 0.2243534, 0.37979636, 0.41960785)
 
 [node name="claw_position" type="Node2D" parent="."]
-position = Vector2(-14, 11.5)
+position = Vector2(-13, 11.5)
+
+[node name="claw_position2" type="Node2D" parent="."]
+position = Vector2(41, 11.5)
 
 [node name="player_detector" type="RayCast2D" parent="."]
 position = Vector2(0, 14)
 target_position = Vector2(-36, 0)
+collision_mask = 2
+
+[node name="player_detector2" type="RayCast2D" parent="."]
+position = Vector2(0, 14)
+target_position = Vector2(36, 0)
 collision_mask = 2
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

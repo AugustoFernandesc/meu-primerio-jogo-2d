@@ -11,6 +11,8 @@ const claw = preload("res://entities/claw.tscn")
 @onready var hitbox: Area2D = $hitbox
 @onready var player_detector: RayCast2D = $player_detector
 @onready var claw_position: Node2D = $claw_position
+@onready var player_detector_2: RayCast2D = $player_detector2
+@onready var claw_position_2: Node2D = $claw_position2
 
 var status: crab_state
 var direction = -1
@@ -54,25 +56,39 @@ func go_to_dead_state():
 
 func idle_state(_delta):
 	velocity.x = 0
-	if player_detector.is_colliding():
+	# Checa se QUALQUER UM dos dois sensores viu o player
+	if player_detector.is_colliding() or player_detector_2.is_colliding():
 		go_to_attack_state()
 
 func attack_state(delta):
-	# Aplica gravidade para ele não flutuar e ser empurrado
 	if not is_on_floor():
 		velocity.y += get_gravity().y * delta
 	velocity.x = 0 
-	if not player_detector.is_colliding():
-		go_to_idle_state()
-		return
-	if can_throw:
-		throw_claw()
-		can_throw = false
 
-func throw_claw():
+	# 1. ESCOLHE O LADO E A POSIÇÃO DA GARRA
+	if player_detector_2.is_colliding(): # Sensor da Direita (Flipado)
+		direction = 1
+		anim.flip_h = true
+		# Usamos o claw_position2 aqui
+		if can_throw:
+			throw_claw(claw_position_2.global_position)
+			can_throw = false
+			
+	elif player_detector.is_colliding(): # Sensor da Esquerda (Normal)
+		direction = -1
+		anim.flip_h = false
+		# Usamos o claw_position aqui
+		if can_throw:
+			throw_claw(claw_position.global_position)
+			can_throw = false
+	else:
+		go_to_idle_state()
+
+# 2. ATUALIZE A FUNÇÃO PARA RECEBER A POSIÇÃO
+func throw_claw(pos: Vector2):
 	var new_claw = claw.instantiate()
 	add_sibling(new_claw)
-	new_claw.position = claw_position.global_position
+	new_claw.global_position = pos # Usa a posição que passamos
 	new_claw.set_direction(self.direction)
 
 func dead_state(_delta):
@@ -83,6 +99,7 @@ func take_damage():
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if anim.animation == "attack":
+		can_throw = true # LIBERA PARA O PRÓXIMO CICLO
 		go_to_idle_state()
 	elif anim.animation == "dead":
 		Globals.score += 150

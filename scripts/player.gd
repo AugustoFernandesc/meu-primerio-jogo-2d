@@ -27,7 +27,7 @@ enum player_state{
 
 @export var max_speed = 110.0
 @export var acceleration = 100
-@export var deceleration = 100
+@export var deceleration = 150
 @export var slide_deceleration = 100
 @export var wall_acceleration = 40
 @export var wall_jump_velocity = 240
@@ -81,14 +81,17 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func go_to_idle_state():
+	if status == player_state.dead:return
 	status = player_state.idle
 	anim.play("idle")
 
 func go_to_walk_state():
+	if status == player_state.dead: return
 	status = player_state.walk
 	anim.play("walk")
 
 func go_to_jump_state():
+	if status == player_state.dead: return
 	status = player_state.jump
 	anim.play("jump")
 	jump_sfx.play()
@@ -96,6 +99,7 @@ func go_to_jump_state():
 	jump_count += 1
 
 func go_to_fall_state():
+	if status == player_state.dead: return
 	status = player_state.fall
 	anim.play("fall")
 
@@ -122,6 +126,7 @@ func go_to_wall_state():
 	jump_count = 0
 
 func go_to_swimming_state():
+	if status == player_state.dead: return
 	status = player_state.swimming
 	anim.play("swimming")
 	water_sfx.play()
@@ -174,6 +179,8 @@ func go_to_dead_state():
 		return
 	status = player_state.dead
 	anim.play("dead")
+	is_in_water = false
+	velocity.y = -150
 	velocity.x = 0
 	collision_layer = 0 
 	hitbox_collision.set_deferred("disabled", true)
@@ -397,6 +404,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		go_to_victory_dance()
 
 func _on_hitbox_body_exited(body: Node2D) -> void:
+	if status == player_state.dead: return
 	if body.is_in_group("water"):
 		is_in_water = false
 		jump_count = 0

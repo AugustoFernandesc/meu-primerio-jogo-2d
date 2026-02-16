@@ -599,7 +599,7 @@ position = Vector2(7961, 130)
 next_level = "winter_world"
 
 [node name="snip_snap_crab" parent="." instance=ExtResource("28_4h4s8")]
-position = Vector2(5649, 134)
+position = Vector2(5512, 118)
 
 [node name="octi" parent="." instance=ExtResource("29_u8qwh")]
 position = Vector2(6009, 306)
