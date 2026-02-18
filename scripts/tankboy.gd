@@ -11,7 +11,7 @@ const MISSILE = preload("uid://bq058f8rijoug")
 var health = 1 
 var max_missiles = 4
 var max_bombs = 3
-var current_speed = 5000.0
+var current_speed = 6000.0
 
 # Variáveis de controle de jogo
 var direction = -1
@@ -29,6 +29,7 @@ var is_dead = false
 @onready var wall_detector: RayCast2D = $wall_detector
 @onready var missile_point: Marker2D = %missile_point
 @onready var bomb_point: Marker2D = %bomb_point
+@onready var hitbox_2: Area2D = $hitbox2
 
 func _ready() -> void:
 	set_physics_process(false)
@@ -162,19 +163,28 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 				body.go_to_knock_back_state(Vector2(push_dir * 300, -200))
 
 func create_lose_boss():
-	# 1. Desativa as colisões para o player não quicar mais
-	$hitbox/CollisionShape2D.set_deferred("disabled", true)
-	# Desativa a colisão principal (corpo do tanque) para o player passar por ele
-	$collision.set_deferred("disabled", true) 
-	
-	# 2. Para o processamento do Boss (ele não anda mais nem ataca)
+	is_dead = true
 	set_physics_process(false)
 	
-	# 3. Cria o piloto
+	# 1. DESCONECTA O SINAL (Isso mata o dano na hora, mesmo que a colisão exista)
+	if hitbox_2.is_connected("body_entered", _on_hitbox_body_entered):
+		hitbox_2.disconnect("body_entered", _on_hitbox_body_entered)
+	
+	# 2. Mata todas as colisões possíveis
+	$collision.set_deferred("disabled", true)
+	$hitbox/CollisionShape2D.set_deferred("disabled", true)
+	
+	# Procura todos os filhos da hitbox_2 e desativa um por um
+	for child in hitbox_2.get_children():
+		if child is CollisionShape2D or child is CollisionPolygon2D:
+			child.set_deferred("disabled", true)
+	
+	# 3. Garante a cor cinza (matando qualquer Tween que esteja rodando)
+	var tween = create_tween()
+	tween.tween_property(sprite, "modulate", Color(0.3, 0.3, 0.3, 1), 0.1)
+	
+	# 4. Cria o piloto
 	var boss_scene = boss_instance.instantiate()
 	get_parent().add_child(boss_scene)
 	boss_scene.global_position = global_position - Vector2(0, 30)
 	Globals.boss_defeated.emit()
-	# NÃO USE visible = false. O tanque vai continuar na tela como destroço.
-	# Se quiser, você pode mudar o frame do sprite para um "tanque quebrado".
-	# sprite.frame = 10 (exemplo)

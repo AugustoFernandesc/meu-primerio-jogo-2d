@@ -89,8 +89,13 @@ advance_message={
 2d_physics/layer_9="hitbox_enemy"
 2d_physics/layer_10="hurt_box"
 
+[physics]
+
+common/physics_ticks_per_second=120
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
+2d/physics_ticks_per_second=60
