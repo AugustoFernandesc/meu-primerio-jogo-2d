@@ -102,5 +102,6 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		can_throw = true # LIBERA PARA O PRÓXIMO CICLO
 		go_to_idle_state()
 	elif anim.animation == "dead":
-		Globals.score += 150
+		Globals.score += 50
+		Globals.total_score_accumulated += 50
 		queue_free()

@@ -129,7 +129,8 @@ vertical_alignment = 1
 
 [node name="life_container" type="HBoxContainer" parent="Control/container_coins"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_horizontal = 0
+size_flags_vertical = 4
 
 [node name="life_icons" type="TextureRect" parent="Control/container_coins/life_container"]
 layout_mode = 2
@@ -147,15 +148,15 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("5_ko5hl")
 theme_override_font_sizes/font_size = 15
-text = " 03"
+text = " 05"
 vertical_alignment = 1
 
 [node name="hp_container" type="HBoxContainer" parent="Control"]
 layout_mode = 0
-offset_left = 35.0
-offset_top = 194.0
-offset_right = 51.0
-offset_bottom = 202.0
+offset_left = 26.0
+offset_top = 102.0
+offset_right = 42.0
+offset_bottom = 110.0
 size_flags_horizontal = 8
 size_flags_vertical = 8
 

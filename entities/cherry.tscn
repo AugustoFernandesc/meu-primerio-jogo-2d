@@ -46,6 +46,7 @@ size = Vector2(11, 2)
 
 [node name="cherry" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 4
+collision_mask = 17
 up_direction = Vector2(0, 1)
 script = ExtResource("1_432ib")
 
@@ -68,6 +69,7 @@ debug_color = Color(0.9874465, 0, 0.31791717, 0.41960785)
 [node name="wallDetector" type="RayCast2D" parent="."]
 position = Vector2(2, 14)
 target_position = Vector2(-10, 0)
+collision_mask = 17
 
 [node name="groundDetector" type="RayCast2D" parent="."]
 position = Vector2(10, 1)

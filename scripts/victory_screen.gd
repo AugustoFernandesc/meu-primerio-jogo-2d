@@ -4,7 +4,7 @@ extends CanvasLayer
 @onready var label_coins: Label = $VBoxContainer/Label_coin
 @onready var label_time: Label = $VBoxContainer/Label_time
 @onready var label_score: Label = $VBoxContainer/Label_score
-@onready var btn_menu: Button = $VBoxContainer/btn_menu
+@onready var btn_menu: Button = $btn_menu
 
 func _ready():
 	label_thanks.visible = false
@@ -30,7 +30,7 @@ func display_victory_sequence():
 	
 	# 2. Moedas
 	await get_tree().create_timer(1.0).timeout
-	label_coins.text = "Moedas coletadas: " + str(Globals.coins)
+	label_coins.text = "Moedas coletadas: " + str(Globals.total_coins_collected)
 	label_coins.visible = true
 	
 		# 4. Tempo
@@ -40,7 +40,7 @@ func display_victory_sequence():
 	
 	# 3. Score
 	await get_tree().create_timer(1.0).timeout
-	label_score.text = "Score Final: " + str(Globals.score)
+	label_score.text = "Score Final: " + str(Globals.total_score_accumulated)
 	label_score.visible = true
 
 	# 5. Botão para sair

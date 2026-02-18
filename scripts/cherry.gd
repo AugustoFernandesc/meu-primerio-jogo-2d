@@ -63,6 +63,7 @@ func take_damage():
 		return
 	go_to_hurt_state()
 	Globals.score += 100
+	Globals.total_score_accumulated += 100
 
 func update_sprite_direction():
 	if direction == 1:

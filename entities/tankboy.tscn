@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bg26n16rfmmrx"]
+[gd_scene load_steps=33 format=3 uid="uid://bg26n16rfmmrx"]
 
 [ext_resource type="Texture2D" uid="uid://csrmghdd6dn3s" path="res://sprites/Sprite Pack 2/8 - Comrade Cheese Puff/Tank_Movement (32 x 32).png" id="1_85pgu"]
 [ext_resource type="Script" uid="uid://bc0rdyuuncfhy" path="res://scripts/tankboy.gd" id="1_x47cb"]
@@ -221,8 +221,11 @@ graph_offset = Vector2(0, 23.977966)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iqtaa"]
 size = Vector2(17, 4)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0dee8"]
+size = Vector2(24, 17)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qrj31"]
-size = Vector2(240, 20)
+size = Vector2(166, 20)
 
 [node name="tankboy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 4
@@ -278,11 +281,20 @@ shape = SubResource("RectangleShape2D_iqtaa")
 disabled = true
 debug_color = Color(0.9652806, 0.16600648, 0.2317608, 0.41960785)
 
+[node name="hitbox2" type="Area2D" parent="." groups=["lethalArea"]]
+position = Vector2(0, -17)
+collision_layer = 16
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hitbox2"]
+position = Vector2(-2, 8.5)
+shape = SubResource("RectangleShape2D_0dee8")
+debug_color = Color(0.98039216, 0.047058824, 0, 0.41960785)
+
 [node name="player_detector" type="Area2D" parent="."]
 
 [node name="collision" type="CollisionShape2D" parent="player_detector"]
 visible = false
-position = Vector2(-1, -11)
+position = Vector2(0, -11)
 shape = SubResource("RectangleShape2D_qrj31")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
@@ -291,5 +303,6 @@ position = Vector2(0, -11)
 [connection signal="timeout" from="bomb_cooldown" to="." method="_on_bomb_cooldown_timeout"]
 [connection signal="timeout" from="missile_cooldown" to="." method="_on_missile_cooldown_timeout"]
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_entered" from="hitbox2" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="player_detector" to="." method="_on_player_detector_body_entered"]
 [connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_entered"]

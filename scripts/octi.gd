@@ -32,3 +32,5 @@ func take_damage():
 	await anim.animation_finished
 	anim.play("dead")
 	queue_free()
+	Globals.score += 100
+	Globals.total_score_accumulated += 100

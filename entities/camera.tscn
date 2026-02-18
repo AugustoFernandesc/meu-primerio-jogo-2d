@@ -11,6 +11,5 @@ position_smoothing_enabled = true
 script = ExtResource("1_ixxe8")
 
 [node name="controls" parent="." instance=ExtResource("2_ukrcf")]
-visible = false
 
 [node name="hud" parent="." instance=ExtResource("3_uv801")]

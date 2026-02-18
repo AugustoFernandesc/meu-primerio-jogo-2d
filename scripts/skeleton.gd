@@ -99,5 +99,6 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		go_to_walk_state()
 		return
 	if anim.animation == "dead":
-		Globals.score += 100
+		Globals.score += 150
+		Globals.total_score_accumulated += 150
 		queue_free()

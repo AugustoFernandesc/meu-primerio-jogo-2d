@@ -11,27 +11,78 @@
 metadata/_edit_vertical_guides_ = [350.0]
 metadata/_edit_horizontal_guides_ = [208.0]
 
-[node name="ui_left" type="TouchScreenButton" parent="."]
-position = Vector2(15, 172)
+[node name="hud_base" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ui_left2" type="Control" parent="hud_base"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="ui_left" type="TouchScreenButton" parent="hud_base/ui_left2"]
+position = Vector2(8, 0)
 texture_normal = ExtResource("1_qf3ex")
 texture_pressed = ExtResource("6_1wvy4")
 action = "left"
 
-[node name="ui_rigth" type="TouchScreenButton" parent="."]
-position = Vector2(47, 172)
+[node name="ui_rigth2" type="Control" parent="hud_base"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="ui_rigth" type="TouchScreenButton" parent="hud_base/ui_rigth2"]
+position = Vector2(40, 0)
 texture_normal = ExtResource("2_qxegb")
 texture_pressed = ExtResource("3_rhhck")
 action = "right"
 
-[node name="ui_up" type="TouchScreenButton" parent="."]
-position = Vector2(322, 140)
+[node name="ui_up2" type="Control" parent="hud_base"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ui_up" type="TouchScreenButton" parent="hud_base/ui_up2"]
+position = Vector2(0, -31)
 texture_normal = ExtResource("4_3rof0")
 texture_pressed = ExtResource("5_878qn")
 action = "jump"
 
-[node name="ui_duck" type="TouchScreenButton" parent="."]
-position = Vector2(354, 204)
-rotation = 3.1415927
+[node name="ui_duck2" type="Control" parent="hud_base"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ui_duck" type="TouchScreenButton" parent="hud_base/ui_duck2"]
+position = Vector2(32, 32)
+rotation = -3.1415925
 texture_normal = ExtResource("4_3rof0")
 texture_pressed = ExtResource("5_878qn")
 action = "duck"
+visibility_mode = 1

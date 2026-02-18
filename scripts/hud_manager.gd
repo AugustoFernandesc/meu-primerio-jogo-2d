@@ -1,11 +1,13 @@
 extends Control
 
+
 @onready var timer_counter: Label = $container/timer_container/timer_counter
 @onready var score_counter: Label = $container/score_container/score_counter
 @onready var coins_counter: Label = $container_coins/coins_container/coins_icons/coins_counter
 @onready var life_counter: Label = $container_coins/life_container/life_icons/life_counter
 @onready var hp_counter: Label = $hp_container/hp_icons/hp_counter
 @onready var clock_timer: Timer = $clock_timer
+
 
 var minutes = 0
 var seconds = 0

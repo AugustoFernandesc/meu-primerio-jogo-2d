@@ -11,7 +11,7 @@ const MISSILE = preload("uid://bq058f8rijoug")
 var health = 1 
 var max_missiles = 4
 var max_bombs = 3
-var current_speed = 7000.0
+var current_speed = 5000.0
 
 # Variáveis de controle de jogo
 var direction = -1
@@ -36,10 +36,10 @@ func _ready() -> void:
 
 func setup_boss_difficulty():
 	# Aqui a mágica acontece: escalamos os stats pela fase
-	health = 0 + boss_phase          # F1=3, F2=4, F3=5...
+	health = 1 + boss_phase          # F1=3, F2=4, F3=5...
 	max_missiles = 3 + boss_phase     # F1=4, F2=5, F3=6...
 	max_bombs = 2 + boss_phase        # F1=3, F2=4, F3=5...
-	current_speed = 10000.0 + (boss_phase * 2000.0) # Fica mais rápido
+	current_speed = 5000.0 + (boss_phase * 2000.0) # Fica mais rápido
 	
 	print("Boss Nível ", boss_phase, " pronto. Vida: ", health)
 
@@ -100,6 +100,7 @@ func take_damage():
 	if health <= 0:
 		is_dead = true
 		Globals.score += 500 * boss_phase
+		Globals.total_score_accumulated += 500
 		call_deferred("create_lose_boss")
 		$hitbox/CollisionShape2D.set_deferred("disabled", true)
 	else:
