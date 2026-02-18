@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://8ru7tt58ppl7"]
+[gd_scene load_steps=49 format=4 uid="uid://8ru7tt58ppl7"]
 
 [ext_resource type="PackedScene" uid="uid://dmovamfv4fqes" path="res://entities/player.tscn" id="1_e2knd"]
 [ext_resource type="Script" uid="uid://s4khlngktm46" path="res://scripts/forest.gd" id="1_xw4on"]
@@ -258,6 +258,12 @@ load_path = "res://.godot/imported/Spike.png-e5a33878ee6b918160f77038b1672bd1.ct
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lyawj"]
 load_path = "res://.godot/imported/Spike.png-e5a33878ee6b918160f77038b1672bd1.ctex"
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4r3a2"]
+load_path = "res://.godot/imported/Spike.png-e5a33878ee6b918160f77038b1672bd1.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8r4i1"]
+load_path = "res://.godot/imported/Spike.png-e5a33878ee6b918160f77038b1672bd1.ctex"
+
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_776yd"]
 a = Vector2(257, 2)
 b = Vector2(1824, 2)
@@ -273,7 +279,7 @@ size = Vector2(20, 194)
 script = ExtResource("1_xw4on")
 
 [node name="player" parent="." instance=ExtResource("1_e2knd")]
-position = Vector2(2614, 381)
+position = Vector2(27, 183)
 
 [node name="tilemaps" type="Node" parent="."]
 
@@ -391,7 +397,7 @@ region_rect = Rect2(0, 0, 576, 208)
 [node name="Camera" parent="." instance=ExtResource("9_jo4av")]
 position = Vector2(20, 186)
 limit_top = 0
-limit_right = 8015
+limit_right = 8014
 limit_bottom = 700
 
 [node name="pause_menu" parent="." instance=ExtResource("20_dki5c")]
@@ -537,18 +543,18 @@ texture = SubResource("CompressedTexture2D_lyawj")
 region_rect = Rect2(0, 8, 112, 8)
 
 [node name="spikes7" parent="Spikes" instance=ExtResource("24_bqdkd")]
-position = Vector2(5911, 492)
+position = Vector2(5897, 492)
 
 [node name="spikes_image" parent="Spikes/spikes7" index="0"]
-texture = SubResource("CompressedTexture2D_lyawj")
-region_rect = Rect2(0, 8, 112, 8)
+texture = SubResource("CompressedTexture2D_4r3a2")
+region_rect = Rect2(0, 8, 79, 8)
 
 [node name="spikes8" parent="Spikes" instance=ExtResource("24_bqdkd")]
-position = Vector2(5720, 492)
+position = Vector2(5702, 492)
 
 [node name="spikes_image" parent="Spikes/spikes8" index="0"]
-texture = SubResource("CompressedTexture2D_lyawj")
-region_rect = Rect2(0, 8, 112, 8)
+texture = SubResource("CompressedTexture2D_8r4i1")
+region_rect = Rect2(0, 8, 79, 8)
 
 [node name="Enemies" type="Node2D" parent="."]
 

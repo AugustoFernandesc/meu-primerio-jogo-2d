@@ -564,11 +564,11 @@ texture = SubResource("CompressedTexture2D_ovcmj")
 region_rect = Rect2(0, 8, 104, 8)
 
 [node name="spikes2" parent="Spike" instance=ExtResource("26_ovcmj")]
-position = Vector2(3512, 98)
+position = Vector2(3497, 98)
 
 [node name="spikes_image" parent="Spike/spikes2" index="0"]
 texture = SubResource("CompressedTexture2D_yqbi3")
-region_rect = Rect2(0, 8, 32, 8)
+region_rect = Rect2(0, 8, 16, 8)
 
 [node name="spikes3" parent="Spike" instance=ExtResource("26_ovcmj")]
 position = Vector2(4003, 130)
@@ -936,7 +936,7 @@ position = Vector2(1283, -75)
 position = Vector2(2862, 24)
 
 [node name="break_box3" parent="Break_box" instance=ExtResource("30_yqbi3")]
-position = Vector2(3426, 59)
+position = Vector2(3842, 67)
 
 [node name="break_box4" parent="Break_box" instance=ExtResource("30_yqbi3")]
 position = Vector2(4515, -26)

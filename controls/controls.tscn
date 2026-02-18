@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4goyp1d7d1rj"]
+[gd_scene load_steps=9 format=3 uid="uid://c4goyp1d7d1rj"]
 
 [ext_resource type="Texture2D" uid="uid://bl8dmyxawjjdu" path="res://controls/ui_buttons_arrow_left_NORMAL.png" id="1_qf3ex"]
 [ext_resource type="Texture2D" uid="uid://v2h5t0m24282" path="res://controls/ui_buttons_arrow_right_NORMAL.png" id="2_qxegb"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://cq0fffafmjkkg" path="res://controls/ui_buttons_arrow_up_NORMAL.png" id="4_3rof0"]
 [ext_resource type="Texture2D" uid="uid://chdx25d46ycq4" path="res://controls/ui_buttons_arrow_up_PRESSED.png" id="5_878qn"]
 [ext_resource type="Texture2D" uid="uid://co2kkfi383gh6" path="res://controls/ui_buttons_arrow_left_PRESSED.png" id="6_1wvy4"]
+[ext_resource type="Texture2D" uid="uid://78r37wslb5rb" path="res://controls/ui_read.png" id="7_qxegb"]
+[ext_resource type="Texture2D" uid="uid://bnv07rdurise6" path="res://controls/ui_pass.png" id="8_rhhck"]
 
 [node name="controls" type="CanvasLayer"]
 metadata/_edit_vertical_guides_ = [350.0]
@@ -48,6 +50,18 @@ position = Vector2(40, 0)
 texture_normal = ExtResource("2_qxegb")
 texture_pressed = ExtResource("3_rhhck")
 action = "right"
+
+[node name="ui_read" type="TouchScreenButton" parent="hud_base/ui_rigth2"]
+position = Vector2(12, -30.84375)
+scale = Vector2(0.05067568, 0.048917845)
+texture_normal = ExtResource("7_qxegb")
+action = "interact"
+
+[node name="ui_pass" type="TouchScreenButton" parent="hud_base/ui_rigth2"]
+position = Vector2(27, -31)
+scale = Vector2(0.047781568, 0.048780512)
+texture_normal = ExtResource("8_rhhck")
+action = "advance_message"
 
 [node name="ui_up2" type="Control" parent="hud_base"]
 layout_mode = 1
