@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cfy015iysyk64" path="res://entities/lose_boss.tscn" id="2_iqtaa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x47cb"]
-size = Vector2(27, 18)
+size = Vector2(27, 16)
 
 [sub_resource type="Animation" id="Animation_x47cb"]
 length = 0.001
@@ -222,10 +222,10 @@ graph_offset = Vector2(0, 23.977966)
 size = Vector2(17, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0dee8"]
-size = Vector2(24, 17)
+size = Vector2(24, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qrj31"]
-size = Vector2(166, 20)
+size = Vector2(106, 20)
 
 [node name="tankboy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 4
@@ -263,9 +263,9 @@ parameters/conditions/time_bomb = false
 parameters/conditions/time_missile = false
 
 [node name="bomb_cooldown" type="Timer" parent="."]
+wait_time = 0.5
 
 [node name="missile_cooldown" type="Timer" parent="."]
-wait_time = 2.5
 
 [node name="wall_detector" type="RayCast2D" parent="."]
 position = Vector2(0, -9)
@@ -286,14 +286,13 @@ position = Vector2(0, -17)
 collision_layer = 16
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="hitbox2"]
-position = Vector2(-2, 8.5)
+position = Vector2(-2, 8)
 shape = SubResource("RectangleShape2D_0dee8")
 debug_color = Color(0.98039216, 0.047058824, 0, 0.41960785)
 
 [node name="player_detector" type="Area2D" parent="."]
 
 [node name="collision" type="CollisionShape2D" parent="player_detector"]
-visible = false
 position = Vector2(0, -11)
 shape = SubResource("RectangleShape2D_qrj31")
 

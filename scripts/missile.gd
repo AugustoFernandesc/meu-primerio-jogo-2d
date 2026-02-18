@@ -1,6 +1,6 @@
 extends AnimatableBody2D
 
-const SPEED = 150.0
+var SPEED = 200.0
 const EXPLOSION = preload("uid://k8vab88hr531")
 var velocity = Vector2.ZERO
 var direction 

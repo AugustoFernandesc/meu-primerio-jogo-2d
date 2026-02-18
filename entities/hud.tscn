@@ -152,7 +152,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("5_ko5hl")
 theme_override_font_sizes/font_size = 15
-text = " 03"
+text = " 05"
 vertical_alignment = 1
 
 [node name="life_container" type="HBoxContainer" parent="Control"]
@@ -180,7 +180,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("5_ko5hl")
 theme_override_font_sizes/font_size = 15
-text = " 05"
+text = " 03"
 vertical_alignment = 1
 
 [connection signal="timeout" from="Control/clock_timer" to="Control" method="_on_clock_timer_timeout"]

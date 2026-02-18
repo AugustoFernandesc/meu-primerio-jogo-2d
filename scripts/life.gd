@@ -9,10 +9,10 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		if Globals.player_life == 5 and Globals.player_hp == 3:
+		if Globals.player_life == 3 and Globals.player_hp == 5:
 			return 
-		if Globals.player_hp >= 3:
-			if Globals.player_life < 5:
+		if Globals.player_hp >= 5:
+			if Globals.player_life < 3:
 				Globals.player_life += 1
 				Globals.player_hp = 1
 				collect_item()

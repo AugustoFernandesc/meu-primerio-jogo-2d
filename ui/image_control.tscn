@@ -78,7 +78,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_p038y")
 theme_override_font_sizes/font_size = 16
-text = "Desenvolvimento Solo: Augusto Fernandes Carvalho"
+text = "Desenvolvido por Augusto Fernandes Carvalho"
 label_settings = SubResource("LabelSettings_7af0j")
 
 [node name="Label3" type="Label" parent="."]
@@ -96,7 +96,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_p038y")
 theme_override_font_sizes/font_size = 16
-text = "Um projeto desenvolvido integralmente 
+text = "Um projeto feito integralmente 
 por uma unica pessoa. 
 Desde a primeira linha de codigo 
 ate o design dos niveis e mecanicas de jogo."

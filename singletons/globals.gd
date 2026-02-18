@@ -2,9 +2,9 @@ extends Node
 
 var coins = 0
 var score = 0
-var player_life = 5
-var player_hp = 3
-var max_hp = 3
+var player_life = 3
+var player_hp = 5
+var max_hp = 5
 var player = null
 var current_checkpoint_pos = Vector2.ZERO
 var has_checkpoint = false
@@ -29,10 +29,10 @@ func _process(delta: float) -> void:
 
 func check_coin_to_life_conversion():
 	while coins >= 15:
-		if player_hp < 3:
+		if player_hp < 5:
 			player_hp += 1
 			coins -= 15
-		elif player_life < 5:
+		elif player_life < 3:
 			player_life += 1
 			coins -= 15
 		else:
@@ -40,10 +40,10 @@ func check_coin_to_life_conversion():
 
 func check_score_to_life_conversion():
 	while score >= 1000:
-		if player_hp < 3:
+		if player_hp < 5:
 			player_hp += 1
 			score -= 1000
-		elif player_life < 5:
+		elif player_life < 3:
 			player_life += 1
 			score -= 1000
 		else:
@@ -52,8 +52,8 @@ func check_score_to_life_conversion():
 func reset_game():
 	coins = 0
 	score = 0
-	player_life = 5
-	player_hp = 3
+	player_life = 3
+	player_hp = 5
 	has_checkpoint = false
 	current_checkpoint_pos = Vector2.ZERO
 	has_ice_cream = false

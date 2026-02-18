@@ -3,25 +3,25 @@ extends CharacterBody2D
 const BOMB = preload("uid://c6segkipgnt5")
 const MISSILE = preload("uid://bq058f8rijoug")
 
-@export_group("Configurações de Fase")
-@export var boss_phase = 1 # Defina 1 para Grassland, 2 para Tropic, etc. no Inspector
+@export_group("Phase Settings")
+# Adicionei ': int = 1' para garantir que nunca seja nulo (Nil)
+@export var boss_phase: int = 1 
 @export var boss_instance : PackedScene
 
-# Atributos que vão mudar conforme a fase
-var health = 1 
-var max_missiles = 4
-var max_bombs = 3
-var current_speed = 6000.0
+# Inicializamos com 0 para o setup_boss_difficulty definir os valores reais
+var health: int = 3
+var max_missiles: int = 4
+var max_bombs: int = 3
+var current_speed: float = 13500.0
 
-# Variáveis de controle de jogo
-var direction = -1
-var turn_count = 0
-var missile_count = 0
-var bomb_count = 0
-var can_launch_missile = true
-var can_launch_bomb = true
-var player_can_hit = false
-var is_dead = false
+var direction: int = -1
+var turn_count: int = 0
+var missile_count: int = 0
+var bomb_count: int = 0
+var can_launch_missile: bool = true
+var can_launch_bomb: bool = true
+var player_can_hit: bool = false
+var is_dead: bool = false
 
 @onready var anim_tree: AnimationTree = $anim_tree
 @onready var state_machine = anim_tree["parameters/playback"]
@@ -32,25 +32,31 @@ var is_dead = false
 @onready var hitbox_2: Area2D = $hitbox2
 
 func _ready() -> void:
+	# Garante que o setup rode ANTES de qualquer processamento físico
+	setup_boss_difficulty()
 	set_physics_process(false)
-	setup_boss_difficulty() # Configura o Boss baseado na fase escolhida
 
 func setup_boss_difficulty():
-	# Aqui a mágica acontece: escalamos os stats pela fase
-	health = 1 + boss_phase          # F1=3, F2=4, F3=5...
-	max_missiles = 3 + boss_phase     # F1=4, F2=5, F3=6...
-	max_bombs = 2 + boss_phase        # F1=3, F2=4, F3=5...
-	current_speed = 5000.0 + (boss_phase * 2000.0) # Fica mais rápido
+	# Proteção extra: se por algum motivo for nulo, vira 1
+	if boss_phase == null: boss_phase = 1
 	
-	print("Boss Nível ", boss_phase, " pronto. Vida: ", health)
+	# Agora a conta está segura
+	health = 2 + boss_phase 
+	max_missiles = 3 + boss_phase 
+	max_bombs = 2 + boss_phase 
+	current_speed = 13500.0 + (boss_phase * 1000.0)
 
 func _physics_process(delta: float) -> void:
+	if is_dead: return
+
 	if wall_detector.is_colliding():
 		direction *= -1
 		wall_detector.scale.x *= -1
 		turn_count += 1
 	
-	match state_machine.get_current_node():
+	var current_node = state_machine.get_current_node()
+	
+	match current_node:
 		"moving":
 			$hitbox/CollisionShape2D.set_deferred("disabled", true)
 			velocity.x = direction * current_speed * delta
@@ -74,38 +80,34 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func update_conditions():
-	# Lógica da escada usando as novas variáveis max_missiles e max_bombs
+	if is_dead: return
+
 	if turn_count <= 2:
 		anim_tree.set("parameters/conditions/can_move", true)
 		anim_tree.set("parameters/conditions/time_missile", false)
+		anim_tree.set("parameters/conditions/time_bomb", false)
+		anim_tree.set("parameters/conditions/is_vunerable", false)
 	elif missile_count < max_missiles:
 		anim_tree.set("parameters/conditions/can_move", false)
 		anim_tree.set("parameters/conditions/time_missile", true)
-		anim_tree.set("parameters/conditions/time_bomb", false)
 	elif bomb_count < max_bombs:
 		anim_tree.set("parameters/conditions/time_missile", false)
 		anim_tree.set("parameters/conditions/time_bomb", true)
 	else:
 		anim_tree.set("parameters/conditions/time_bomb", false)
 		anim_tree.set("parameters/conditions/is_vunerable", true)
-	
-	if health <= 0:
-		state_machine.travel("death")
 
 func take_damage():
-	if is_dead:
-		return
+	if is_dead: return
 	health -= 1
 	start_damage_flash()
 	
 	if health <= 0:
 		is_dead = true
-		Globals.score += 500 * boss_phase
-		Globals.total_score_accumulated += 500
-		call_deferred("create_lose_boss")
-		$hitbox/CollisionShape2D.set_deferred("disabled", true)
+		state_machine.travel("death") # Toca a animação de abrir o tanque
+		await get_tree().create_timer(0.2).timeout
+		create_lose_boss()
 	else:
-		# Se ele ainda tem vida, ele reseta o ciclo para atacar de novo
 		reset_boss_cycle()
 
 func reset_boss_cycle():
@@ -113,78 +115,98 @@ func reset_boss_cycle():
 	missile_count = 0
 	bomb_count = 0
 	player_can_hit = false
-	# Isso força o Boss a voltar para o estado 'moving'
+	can_launch_missile = true
+	can_launch_bomb = true
 	anim_tree.set("parameters/conditions/is_vunerable", false)
+	anim_tree.set("parameters/conditions/time_bomb", false)
+	anim_tree.set("parameters/conditions/time_missile", false)
 	anim_tree.set("parameters/conditions/can_move", true)
 
 func start_damage_flash():
 	var tween = create_tween()
-	sprite.modulate = Color(10, 10, 10, 1) # Brilha branco
+	sprite.modulate = Color(10, 10, 10, 1)
 	tween.tween_property(sprite, "modulate", Color(1, 1, 1, 1), 0.2)
 
 func launch_missile():
-	if missile_count < max_missiles:
-		var missile_instance = MISSILE.instantiate()
-		add_sibling(missile_instance)
-		missile_instance.global_position = missile_point.global_position
-		missile_instance.set_direction(direction)
-		$missile_cooldown.start()
-		missile_count += 1
+	var missile_instance = MISSILE.instantiate()
+	
+	missile_instance.SPEED = 200.0 + (boss_phase * 40.0)
+	
+	add_sibling(missile_instance)
+	missile_instance.global_position = missile_point.global_position
+	missile_instance.set_direction(direction)
+	$missile_cooldown.start()
+	missile_count += 1
 
 func throw_bomb():
-	if bomb_count < max_bombs:
-		var bomb_instance = BOMB.instantiate()
-		add_sibling(bomb_instance)
-		bomb_instance.global_position = bomb_point.global_position
-		bomb_instance.apply_impulse(Vector2(randi_range(direction * 30, direction * 200), randi_range(-200, -400)))
-		$bomb_cooldown.start()
-		bomb_count += 1
+	var bomb_instance = BOMB.instantiate()
+	add_sibling(bomb_instance)
+	bomb_instance.global_position = bomb_point.global_position
+	
+	# Tunando a bomba: 
+	# Aumentei a base da arena e os multiplicadores de força
+	var arena_width = 220.0 + ((boss_phase - 1) * 40.0) 
+	
+	# Impulse_x maior para ela cruzar a tela com velocidade
+	var impulse_x = randi_range(direction * (arena_width * 0.7), direction * (arena_width * 1.1))
+	
+	# Impulse_y ajustado para um arco mais bonito (mais alto e longe)
+	var impulse_y = randi_range(-250, -320)
+	
+	bomb_instance.apply_impulse(Vector2(impulse_x, impulse_y))
+	$bomb_cooldown.start()
+	bomb_count += 1
+
+func create_lose_boss():
+	is_dead = true
+	# Em vez de desligar o physics_process, vamos apenas zerar a velocidade
+	# Isso ajuda a manter o corpo "vivo" para o sistema de colisão do Player
+	velocity = Vector2.ZERO
+	
+	# Desconecta o sinal de dano para evitar erros
+	if hitbox_2.is_connected("body_entered", _on_hitbox_body_entered):
+		hitbox_2.disconnect("body_entered", _on_hitbox_body_entered)
+	
+	# Desativa as hitboxes de DANO (as que fazem o pinguim sofrer)
+	$hitbox/CollisionShape2D.set_deferred("disabled", true)
+	for child in hitbox_2.get_children():
+		if child is CollisionShape2D or child is CollisionPolygon2D:
+			child.set_deferred("disabled", true)
+	
+	# IMPORTANTE: Garante que a colisão principal do tanque esteja ATIVA e na camada certa
+	# Se o seu player está na layer 1, o tanque morto precisa estar na layer 1
+	set_collision_layer_value(1, true) 
+	set_collision_mask_value(1, true)
+	
+	# Muda a cor para cinza (destruído)
+	var tween = create_tween()
+	tween.tween_property(sprite, "modulate", Color(0.3, 0.3, 0.3, 1), 0.1)
+	
+	# Criar piloto
+	var boss_scene = boss_instance.instantiate()
+	get_parent().add_child(boss_scene)
+	boss_scene.global_position = global_position - Vector2(0, 30)
+	
+	Globals.boss_defeated.emit()
 
 func _on_bomb_cooldown_timeout() -> void:
 	can_launch_bomb = true
 
 func _on_missile_cooldown_timeout() -> void:
 	can_launch_missile = true
-
-func _on_player_detector_body_entered(_body: Node2D) -> void:
-	set_physics_process(true)
-
-func _on_visible_on_screen_enabler_2d_screen_entered() -> void:
-	set_physics_process(true)
-
+	
 func _on_hitbox_body_entered(body: Node2D) -> void:
-	if body.name == "player":
+	if body.name == "player" and not is_dead:
 		if player_can_hit:
-			body.velocity = Vector2(direction * -200, -300) # Pequeno pulo do player ao bater
+			body.velocity = Vector2(direction * -200, -300)
 			take_damage()
 		else:
 			if body.has_method("go_to_knock_back_state"):
 				var push_dir = 1 if body.global_position.x > global_position.x else -1
 				body.go_to_knock_back_state(Vector2(push_dir * 300, -200))
 
-func create_lose_boss():
-	is_dead = true
-	set_physics_process(false)
-	
-	# 1. DESCONECTA O SINAL (Isso mata o dano na hora, mesmo que a colisão exista)
-	if hitbox_2.is_connected("body_entered", _on_hitbox_body_entered):
-		hitbox_2.disconnect("body_entered", _on_hitbox_body_entered)
-	
-	# 2. Mata todas as colisões possíveis
-	$collision.set_deferred("disabled", true)
-	$hitbox/CollisionShape2D.set_deferred("disabled", true)
-	
-	# Procura todos os filhos da hitbox_2 e desativa um por um
-	for child in hitbox_2.get_children():
-		if child is CollisionShape2D or child is CollisionPolygon2D:
-			child.set_deferred("disabled", true)
-	
-	# 3. Garante a cor cinza (matando qualquer Tween que esteja rodando)
-	var tween = create_tween()
-	tween.tween_property(sprite, "modulate", Color(0.3, 0.3, 0.3, 1), 0.1)
-	
-	# 4. Cria o piloto
-	var boss_scene = boss_instance.instantiate()
-	get_parent().add_child(boss_scene)
-	boss_scene.global_position = global_position - Vector2(0, 30)
-	Globals.boss_defeated.emit()
+func _on_player_detector_body_entered(_body: Node2D) -> void:
+	set_physics_process(true)
+
+func _on_visible_on_screen_enabler_2d_screen_entered() -> void:
+	set_physics_process(true)

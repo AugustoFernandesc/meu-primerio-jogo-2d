@@ -26,8 +26,8 @@ func _on_body_entered(body: Node2D) -> void:
 		await transition.change_scene()
 		await get_tree().create_timer(0.4).timeout
 		load_next_scene()
-		Globals.player_life = 5
-		Globals.player_hp = 3
+		Globals.player_life = 3
+		Globals.player_hp = 5
 		Globals.has_ice_cream = false
 
 func load_next_scene():

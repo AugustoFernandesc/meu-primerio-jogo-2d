@@ -15,9 +15,7 @@ const spinning_bone = preload("res://entities/spinning_bone.tscn")
 @onready var player_detector: RayCast2D = $playerDetector
 @onready var bone_start_position: Node2D = $boneStartPosition
 
-
-
-const SPEED = 10.0
+const SPEED = 25.0
 const JUMP_VELOCITY = -400.0
 
 var status: skeleton_state

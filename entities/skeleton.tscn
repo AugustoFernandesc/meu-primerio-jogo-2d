@@ -180,6 +180,7 @@ debug_color = Color(1, 0.012774696, 0.04643721, 0.41960785)
 [node name="wallDetector" type="RayCast2D" parent="."]
 position = Vector2(2, 14)
 target_position = Vector2(10, 0)
+collision_mask = 17
 
 [node name="groundDetector" type="RayCast2D" parent="."]
 position = Vector2(10, 1)

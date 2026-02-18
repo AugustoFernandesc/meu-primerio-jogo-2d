@@ -411,23 +411,46 @@ func _on_hitbox_body_exited(body: Node2D) -> void:
 		go_to_jump_state()
 
 func hit_enemy(area: Area2D):
-	if velocity.y > 0:
-		#enemy dead
+	var enemy = area.get_parent()
+	var player_bottom = global_position.y
+	
+	# Usamos um offset de -5 para ser justo com o tamanho do Octi
+	var enemy_top = area.global_position.y - 5 
+	
+	var sinking_in_water = is_in_water and velocity.y > 5
+	var normal_falling = not is_in_water and velocity.y > 0
+	
+	# --- AGORA CHECAMOS PELO NOME OCTI ---
+	var is_octi = enemy.name.contains("octi")
+	
+	var can_kill = false
+	
+	if is_octi:
+		# Regra de elite para o Octi: tem que estar acima dele e caindo
+		if (sinking_in_water or normal_falling) and player_bottom < enemy_top:
+			can_kill = true
+	else:
+		# Regra geral para as Cherries e outros: encostou caindo, morreu
+		if normal_falling or sinking_in_water:
+			can_kill = true
+
+	if can_kill:
 		damage_sfx.play()
-		area.get_parent().take_damage()
-		if is_in_water:
-			velocity.y = -100
+		if enemy.has_method("take_damage"):
+			enemy.take_damage()
+		
+		# Feedback de pulo/impulso
+		velocity.y = -70 if is_in_water else -300
+		if is_in_water: 
 			go_to_swimming_state()
-		else:
+		else: 
 			go_to_jump_state()
 	else:
+		# Dano no player (se bater por baixo ou de lado)
 		var difference = global_position.x - area.global_position.x
-		var push_direction = 0
-		if difference > 0:
-			push_direction = 1 
-		else:
-			push_direction = -1
-		go_to_knock_back_state(Vector2(push_direction * 250, -200))
+		var push_direction = 1 if difference > 0 else -1
+		var vertical_push = -150 if player_bottom < enemy_top else 150
+		go_to_knock_back_state(Vector2(push_direction * 200, vertical_push))
 
 func hit_lethal_area(area: Area2D):
 	if area:
@@ -444,7 +467,7 @@ func hit_lethal_area(area: Area2D):
 func _on_reload_timer_timeout() -> void:
 	Globals.player_life -= 1
 	if Globals.player_life > 0:
-		Globals.player_hp = 3
+		Globals.player_hp = 5
 		Globals.coins = 0
 		Globals.score = 0
 		get_tree().reload_current_scene()

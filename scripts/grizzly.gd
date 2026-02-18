@@ -16,7 +16,7 @@ enum grizzly_state {
 @onready var ground_detector: RayCast2D = $groundDetector
 @onready var hand_hitbox: CollisionShape2D = $hitbox/hand_hitbox
 @onready var collision: CollisionShape2D = $CollisionShape2D
-@onready var hitbox_damage: CollisionShape2D = $hitbox/hitbox_damage
+@onready var hitbox_damage: CollisionShape2D = $hitbox2/hitbox_damage
 
 
 const SPEED = 50.0

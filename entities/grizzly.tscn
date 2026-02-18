@@ -136,11 +136,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yowkt"]
 size = Vector2(35, 22)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l6rgk"]
-size = Vector2(35, 22)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ktha"]
 size = Vector2(9.5, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l6rgk"]
+size = Vector2(35, 22)
 
 [node name="grizzly" type="CharacterBody2D"]
 script = ExtResource("1_yowkt")
@@ -156,17 +156,20 @@ position = Vector2(-0.5, 5)
 shape = SubResource("RectangleShape2D_yowkt")
 
 [node name="hitbox" type="Area2D" parent="." groups=["enemies"]]
-collision_layer = 4
-
-[node name="hitbox_damage" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(-0.5, 5)
-shape = SubResource("RectangleShape2D_l6rgk")
-debug_color = Color(1, 0.012774696, 0.04643721, 0.41960785)
+collision_layer = 16
 
 [node name="hand_hitbox" type="CollisionShape2D" parent="hitbox" groups=["lethalArea"]]
 position = Vector2(-22.25, 6)
 shape = SubResource("RectangleShape2D_7ktha")
 debug_color = Color(0.9924775, 0, 0.2578682, 0.41960785)
+
+[node name="hitbox2" type="Area2D" parent="." groups=["enemies"]]
+collision_layer = 4
+
+[node name="hitbox_damage" type="CollisionShape2D" parent="hitbox2"]
+position = Vector2(-0.5, 5)
+shape = SubResource("RectangleShape2D_l6rgk")
+debug_color = Color(1, 0.012774696, 0.04643721, 0.41960785)
 
 [node name="wallDetector" type="RayCast2D" parent="."]
 position = Vector2(0, 11)
@@ -188,7 +191,7 @@ collision_mask = 2
 
 [node name="attack_player" type="RayCast2D" parent="."]
 position = Vector2(0, 4)
-target_position = Vector2(-26, 0)
+target_position = Vector2(-26.8, 0)
 collision_mask = 2
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

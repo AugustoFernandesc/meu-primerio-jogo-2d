@@ -38,9 +38,10 @@ animations = [{
 radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mht07"]
-radius = 9.0
+radius = 8.0
 
 [node name="octi" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 4
 script = ExtResource("1_mht07")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -53,9 +54,9 @@ shape = SubResource("CircleShape2D_4hhk7")
 
 [node name="hitbox" type="Area2D" parent="." groups=["enemies"]]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox" groups=["enemies"]]
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_mht07")
 debug_color = Color(0.98840195, 0, 0.30758548, 0.41960785)

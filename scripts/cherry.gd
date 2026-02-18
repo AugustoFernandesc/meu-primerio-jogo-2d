@@ -10,7 +10,7 @@ enum cherry_state {
 @onready var wall_detector: RayCast2D = $wallDetector
 @onready var ground_detector: RayCast2D = $groundDetector
 
-const SPEED = 20.0
+const SPEED = 35.0
 const JUMP_VELOCITY = -400.0
 
 var status: cherry_state
@@ -62,8 +62,8 @@ func take_damage():
 	if status == cherry_state.hurt:
 		return
 	go_to_hurt_state()
-	Globals.score += 100
-	Globals.total_score_accumulated += 100
+	Globals.score += 50
+	Globals.total_score_accumulated += 50
 
 func update_sprite_direction():
 	if direction == 1:
