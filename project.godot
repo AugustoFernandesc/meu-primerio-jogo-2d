@@ -19,6 +19,7 @@ config/features=PackedStringArray("4.5", "Mobile")
 DialogManager="*res://singletons/dialog_manager.gd"
 Globals="*res://singletons/globals.gd"
 MusicPlayer="*res://scripts/background_music.gd"
+Transition="*res://scene/transition.tscn"
 
 [display]
 

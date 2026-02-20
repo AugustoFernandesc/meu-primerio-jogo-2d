@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://df5jipr45p8fd"]
+[gd_scene load_steps=35 format=4 uid="uid://df5jipr45p8fd"]
 
 [ext_resource type="PackedScene" uid="uid://dmovamfv4fqes" path="res://entities/player.tscn" id="1_3kscr"]
 [ext_resource type="Script" uid="uid://ciaiuj3eblo8x" path="res://scripts/grassland.gd" id="1_tco1r"]
@@ -66,11 +66,14 @@ load_path = "res://.godot/imported/Spike.png-e5a33878ee6b918160f77038b1672bd1.ct
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kk0em"]
 load_path = "res://.godot/imported/Spike.png-e5a33878ee6b918160f77038b1672bd1.ctex"
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ffd5"]
+size = Vector2(39, 183.5)
+
 [node name="grassland" type="Node2D"]
 script = ExtResource("1_tco1r")
 
 [node name="player" parent="." instance=ExtResource("1_3kscr")]
-position = Vector2(83, 194)
+position = Vector2(90, 183)
 
 [node name="tiles" type="Node2D" parent="."]
 
@@ -165,6 +168,7 @@ limit_right = 8000
 [node name="levelend" parent="." instance=ExtResource("10_d4ph7")]
 position = Vector2(7884, -799)
 next_level = "forest"
+level_name_display = "Fossil Forest"
 
 [node name="coins" type="Node2D" parent="."]
 position = Vector2(716, -8)
@@ -485,6 +489,15 @@ position = Vector2(6866, -539)
 id_single = "life_5"
 
 [node name="pause_menu" parent="." instance=ExtResource("11_dm3bm")]
+
+[node name="limits" type="Node2D" parent="."]
+
+[node name="limit" type="StaticBody2D" parent="limits"]
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="limits/limit"]
+position = Vector2(-18, 111.75)
+shape = SubResource("RectangleShape2D_1ffd5")
 
 [editable path="Spikes/spikes"]
 [editable path="Spikes/spikes2"]

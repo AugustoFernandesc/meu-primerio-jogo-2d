@@ -1,12 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://bh7y4480xg26v"]
+[gd_scene load_steps=6 format=3 uid="uid://bh7y4480xg26v"]
 
 [ext_resource type="Shader" uid="uid://04ks6cfy8igq" path="res://shaders/transition.gdshader" id="1_hpshh"]
 [ext_resource type="Script" uid="uid://x6ehi4y4vd38" path="res://scripts/transition.gd" id="1_rwd3a"]
 [ext_resource type="Script" uid="uid://cvpfosjnvvi28" path="res://scripts/color_react.gd" id="2_pywll"]
+[ext_resource type="FontFile" uid="uid://dt4pf7sggwy8l" path="res://ui/at01.ttf" id="4_72ttf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pywll"]
 shader = ExtResource("1_hpshh")
-shader_parameter/progress = 0.0
+shader_parameter/progress = 1.0
 
 [node name="transition" type="CanvasLayer"]
 script = ExtResource("1_rwd3a")
@@ -18,6 +19,33 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("2_pywll")
 metadata/_edit_use_anchors_ = true
+
+[node name="chapter" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("4_72ttf")
+theme_override_font_sizes/font_size = 32
+
+[node name="phase" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_72ttf")
+theme_override_font_sizes/font_size = 32

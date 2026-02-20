@@ -180,12 +180,12 @@ position = Vector2(10, 1)
 target_position = Vector2(0, 16)
 
 [node name="playerDetector" type="RayCast2D" parent="."]
-position = Vector2(0, 14)
+position = Vector2(0, 2)
 target_position = Vector2(100, 0)
 collision_mask = 2
 
 [node name="playerDetector2" type="RayCast2D" parent="."]
-position = Vector2(0, 14)
+position = Vector2(0, 2)
 target_position = Vector2(-100, 0)
 collision_mask = 2
 

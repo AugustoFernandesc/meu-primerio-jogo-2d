@@ -620,31 +620,37 @@ position = Vector2(3082, 45)
 position = Vector2(4042, 111)
 
 [node name="brokenBlock5" parent="BrokenBlock" instance=ExtResource("12_kwwm6")]
-position = Vector2(4314, 93)
+position = Vector2(4313, 99)
 
 [node name="brokenBlock6" parent="BrokenBlock" instance=ExtResource("12_kwwm6")]
-position = Vector2(4314, 45)
+position = Vector2(4314, 62)
 
 [node name="brokenBlock7" parent="BrokenBlock" instance=ExtResource("12_kwwm6")]
-position = Vector2(4314, -2)
+position = Vector2(4314, 24)
 
 [node name="brokenBlock8" parent="BrokenBlock" instance=ExtResource("12_kwwm6")]
-position = Vector2(4362, -34)
+position = Vector2(4336, -9)
 
 [node name="brokenBlock9" parent="BrokenBlock" instance=ExtResource("12_kwwm6")]
-position = Vector2(4413, -2)
+position = Vector2(4373, 11)
 
 [node name="brokenBlock10" parent="BrokenBlock" instance=ExtResource("12_kwwm6")]
-position = Vector2(4464, 14)
+position = Vector2(4410, 23)
 
 [node name="brokenBlock11" parent="BrokenBlock" instance=ExtResource("12_kwwm6")]
-position = Vector2(4515, 31)
+position = Vector2(4443, 23)
 
 [node name="brokenBlock12" parent="BrokenBlock" instance=ExtResource("12_kwwm6")]
-position = Vector2(4565, 21)
+position = Vector2(4477, 24)
+
+[node name="brokenBlock13" parent="BrokenBlock" instance=ExtResource("12_kwwm6")]
+position = Vector2(4515, 23)
+
+[node name="brokenBlock14" parent="BrokenBlock" instance=ExtResource("12_kwwm6")]
+position = Vector2(4548, 14)
 
 [node name="ice_cream" parent="." instance=ExtResource("27_l33ao")]
-position = Vector2(4565, 5)
+position = Vector2(4549, -7)
 
 [node name="limits" type="Node2D" parent="."]
 
@@ -665,6 +671,8 @@ shape = SubResource("RectangleShape2D_ei81g")
 [node name="levelend" parent="." instance=ExtResource("10_d18o5")]
 position = Vector2(7859, 119)
 next_level = "winter_world"
+level_name_display = "Arctic Frost"
+next_chapter = 4
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -757,6 +765,12 @@ position = Vector2(6317, 194)
 
 [node name="octi22" parent="Enemies" instance=ExtResource("29_u8qwh")]
 position = Vector2(6470, 197)
+
+[node name="octi25" parent="Enemies" instance=ExtResource("29_u8qwh")]
+position = Vector2(6401, 193)
+
+[node name="octi26" parent="Enemies" instance=ExtResource("29_u8qwh")]
+position = Vector2(6012, 194)
 
 [node name="octi23" parent="Enemies" instance=ExtResource("29_u8qwh")]
 position = Vector2(6605, 195)
@@ -868,7 +882,7 @@ position = Vector2(3650, 93)
 position = Vector2(4042, 91)
 
 [node name="coin11" parent="Coin" instance=ExtResource("29_ljjne")]
-position = Vector2(4362, -53)
+position = Vector2(4373, -11)
 
 [node name="coin12" parent="Coin" instance=ExtResource("29_ljjne")]
 position = Vector2(5258, 59)
@@ -939,7 +953,7 @@ position = Vector2(2862, 24)
 position = Vector2(3842, 67)
 
 [node name="break_box4" parent="Break_box" instance=ExtResource("30_yqbi3")]
-position = Vector2(4515, -26)
+position = Vector2(5143, 78)
 
 [node name="break_box5" parent="Break_box" instance=ExtResource("30_yqbi3")]
 position = Vector2(7440, 48)
@@ -948,18 +962,23 @@ position = Vector2(7440, 48)
 
 [node name="life" parent="Lifes" instance=ExtResource("31_yqbi3")]
 position = Vector2(2218, -16)
+id_single = "life_1"
 
 [node name="life2" parent="Lifes" instance=ExtResource("31_yqbi3")]
 position = Vector2(2600, 14)
+id_single = "life_2"
 
 [node name="life3" parent="Lifes" instance=ExtResource("31_yqbi3")]
 position = Vector2(5990, 220)
+id_single = "life_3"
 
 [node name="life4" parent="Lifes" instance=ExtResource("31_yqbi3")]
 position = Vector2(6237, 493)
+id_single = "life_4"
 
 [node name="life5" parent="Lifes" instance=ExtResource("31_yqbi3")]
 position = Vector2(6619, 493)
+id_single = "life_5"
 
 [editable path="Spike/spikes"]
 [editable path="Spike/spikes2"]

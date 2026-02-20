@@ -30,8 +30,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_agiu6")
-default_minutes = 0
-default_seconds = 5
+default_minutes = 3
+default_seconds = 15
 
 [node name="clock_timer" type="Timer" parent="Control"]
 autostart = true

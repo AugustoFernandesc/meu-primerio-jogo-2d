@@ -18,7 +18,7 @@ enum grizzly_state {
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var hitbox_damage: CollisionShape2D = $hitbox2/hitbox_damage
 
-
+var life = 2
 const SPEED = 50.0
 
 var status: grizzly_state
@@ -125,7 +125,13 @@ func sleeping_state(_delta):
 		go_to_walk_state()
 
 func take_damage():
-	go_to_dead_state()
+	life -= 1
+	if life <= 0:
+		go_to_dead_state()
+	else:
+		var tween = create_tween()
+		anim.modulate = Color.RED
+		tween.tween_property(anim, "modulate", Color.WHITE, 0.2)
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if anim.animation == "attack":

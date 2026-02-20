@@ -12,8 +12,8 @@ var items_collect = []
 var has_ice_cream = false
 var time_elapsed = 0.0 
 var is_timer_active = false
-var lendo_placa: bool = false
-
+var ready_plate: bool = false
+var first_time_in_level = true
 # VARIÁVEIS PARA A TELA DE VITÓRIA
 var total_coins_collected = 0
 var total_score_accumulated = 0
@@ -34,6 +34,7 @@ func check_coin_to_life_conversion():
 			coins -= 15
 		elif player_life < 3:
 			player_life += 1
+			player_hp = 1  #Reseta o HP ao ganhar vida nova
 			coins -= 15
 		else:
 			break
@@ -45,6 +46,7 @@ func check_score_to_life_conversion():
 			score -= 1000
 		elif player_life < 3:
 			player_life += 1
+			player_hp = 1  #  Reseta o HP ao ganhar vida nova
 			score -= 1000
 		else:
 			break
