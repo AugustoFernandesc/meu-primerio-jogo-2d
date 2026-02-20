@@ -427,7 +427,7 @@ b = Vector2(5227, -35)
 script = ExtResource("1_mjtd1")
 
 [node name="player" parent="." instance=ExtResource("1_bmxgx")]
-position = Vector2(17, 171)
+position = Vector2(38, 147)
 
 [node name="tilemaps" type="Node" parent="."]
 

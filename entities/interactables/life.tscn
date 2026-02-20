@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://b7amedbi13p11"]
+[gd_scene load_steps=15 format=3 uid="uid://b7amedbi13p11"]
 
 [ext_resource type="Script" uid="uid://btci2o7g71bop" path="res://scripts/life.gd" id="1_jfpoy"]
 [ext_resource type="Texture2D" uid="uid://cq06jtvingc18" path="res://sprites/Mini FX, Items & UI/Effects/Bright_Sparkle (16 x 16).png" id="2_h21od"]
 [ext_resource type="Texture2D" uid="uid://b7mcphupxkise" path="res://sprites/Mini FX, Items & UI/Common Pick-ups/Heart_Spin (16 x 16).png" id="2_i4cht"]
+[ext_resource type="AudioStream" uid="uid://d1ovqerar6bg4" path="res://sons/Heal.ogg" id="4_h21od"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m7b1b"]
 atlas = ExtResource("2_h21od")
@@ -89,6 +90,9 @@ autoplay = "life"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_6a08t")
+
+[node name="heal" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_h21od")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -703,6 +703,7 @@ position = Vector2(688, 104)
 lines = Array[String](["A grama deu lugar a floresta.", "O ar aqui e pesado", "e o caminho para o sul", "parece cada vez mais distante.", "As arvores sao altas,", "mas a vontade de voltar", "para a casa deve ser maior.", "Siga o faro do vento frio e nao se perca!"])
 
 [node name="limits" type="Area2D" parent="."]
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="limits"]
 shape = SubResource("SegmentShape2D_776yd")

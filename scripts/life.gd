@@ -2,6 +2,7 @@ extends Area2D
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @export var id_single: String
+@onready var heal: AudioStreamPlayer = $heal
 
 func _ready() -> void:
 	if Globals.items_collect.has(id_single):
@@ -9,6 +10,7 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
+		heal.play()
 		if Globals.player_life == 3 and Globals.player_hp == 5:
 			return 
 		if Globals.player_hp >= 5:

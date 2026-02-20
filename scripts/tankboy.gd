@@ -206,7 +206,11 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 				body.go_to_knock_back_state(Vector2(push_dir * 300, -200))
 
 func _on_player_detector_body_entered(_body: Node2D) -> void:
-	set_physics_process(true)
+	if _body.name == "player" or _body.is_in_group("player"):
+		set_physics_process(true)
+		if has_node("/root/MusicPlayer"):
+			MusicPlayer.start_boss_music()
+
 
 func _on_visible_on_screen_enabler_2d_screen_entered() -> void:
 	set_physics_process(true)

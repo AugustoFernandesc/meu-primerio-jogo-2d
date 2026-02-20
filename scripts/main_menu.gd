@@ -3,7 +3,8 @@ extends MarginContainer
 @onready var menu_sfx: AudioStreamPlayer = $menu_sfx
 
 func _ready() -> void:
-	MusicPlayer.stop()
+	if MusicPlayer.has_method("stop_all"):
+		MusicPlayer.stop_all()
 	menu_sfx.play()
 	Globals.is_timer_active = false
 
