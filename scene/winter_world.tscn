@@ -495,6 +495,7 @@ position = Vector2(6141, 241)
 
 [node name="tankboy" parent="." instance=ExtResource("22_uou7h")]
 position = Vector2(7587, 367)
+boss_phase = 4
 
 [node name="limits" type="Node2D" parent="."]
 

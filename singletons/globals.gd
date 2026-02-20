@@ -19,6 +19,7 @@ var total_coins_collected = 0
 var total_score_accumulated = 0
 
 signal boss_defeated
+signal life_changed 
 
 func _process(delta: float) -> void:
 	if is_timer_active:
@@ -32,10 +33,12 @@ func check_coin_to_life_conversion():
 		if player_hp < 5:
 			player_hp += 1
 			coins -= 15
+			life_changed.emit() # SINAL EMITIDO AQUI!
 		elif player_life < 3:
 			player_life += 1
-			player_hp = 1  #Reseta o HP ao ganhar vida nova
+			player_hp = 1
 			coins -= 15
+			life_changed.emit() # SINAL EMITIDO AQUI!
 		else:
 			break
 
@@ -44,10 +47,12 @@ func check_score_to_life_conversion():
 		if player_hp < 5:
 			player_hp += 1
 			score -= 1000
+			life_changed.emit() # SINAL EMITIDO AQUI!
 		elif player_life < 3:
 			player_life += 1
-			player_hp = 1  #  Reseta o HP ao ganhar vida nova
+			player_hp = 1
 			score -= 1000
+			life_changed.emit() # SINAL EMITIDO AQUI!
 		else:
 			break
 

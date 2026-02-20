@@ -6,7 +6,8 @@ var tracks = {
 	"forest": preload("res://sons/forest.ogg"),
 	"tropic": preload("res://sons/tropic.ogg"),
 	"winter_world": preload("res://sons/winter_world.ogg"),
-	"boss": preload("res://sons/boss.mp3")
+	"boss": preload("res://sons/boss.mp3"),
+	"extra_life": preload("res://sons/Heal.ogg")
 }
 
 @onready var p1: AudioStreamPlayer = $background_music
@@ -17,10 +18,9 @@ var current_world_track: String = ""
 
 func _ready() -> void:
 	current_p = p1
-	# Conecta ao seu sinal global de vitória
 	if Globals.has_signal("boss_defeated"):
 		Globals.boss_defeated.connect(stop_boss_music)
-	print("--- MusicPlayer Pronto! ---")
+	Globals.life_changed.connect(_on_life_changed)
 
 func play_track(world_name: String):
 	if not tracks.has(world_name): return
@@ -51,11 +51,11 @@ func _crossfade(new_stream: AudioStream, target_vol: float):
 
 func _get_volume(world_name: String) -> float:
 	match world_name:
-		"grassland": return -27.0
+		"grassland": return -32.0
 		"forest": return -23.0
-		"tropic": return -10.0
-		"winter_world": return -25.0
-		"boss": return -15.0
+		"tropic": return -15.0
+		"winter_world": return -30.0
+		"boss": return -30.0
 	return 0.0
 
 func start_boss_music():
@@ -69,3 +69,11 @@ func stop_all():
 	if p1: p1.stop()
 	if p2: p2.stop()
 	current_world_track = "" 
+
+func _on_life_changed() -> void:
+	var sfx_player = AudioStreamPlayer.new()
+	add_child(sfx_player)
+	sfx_player.stream = tracks["extra_life"]
+	sfx_player.volume_db = -20.0 
+	sfx_player.play()
+	sfx_player.finished.connect(sfx_player.queue_free)

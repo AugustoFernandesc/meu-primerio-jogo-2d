@@ -962,7 +962,7 @@ position = Vector2(7440, 48)
 
 [node name="life" parent="Lifes" instance=ExtResource("31_yqbi3")]
 position = Vector2(2218, -16)
-id_single = "life_1"
+id_single = "life_10"
 
 [node name="life2" parent="Lifes" instance=ExtResource("31_yqbi3")]
 position = Vector2(2600, 14)
