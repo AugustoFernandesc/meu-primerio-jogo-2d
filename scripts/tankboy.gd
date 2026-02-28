@@ -144,16 +144,29 @@ func throw_bomb():
 func create_lose_boss():
 	is_dead = true
 	velocity = Vector2.ZERO
+	
+	# 1. DESLIGA O DETECTOR (Para a música não bugar ao pular)
+	if has_node("player_detector"):
+		$player_detector.queue_free()
+	
+	# 2. DESLIGA O DANO, MANTÉM O CORPO
+	# Removemos ele da camada de inimigos (ex: camada 2) 
+	# e colocamos na camada de chão/mundo (camada 1)
+	collision_layer = 1 
+	collision_mask = 1
+	
+	# 3. MATA A ÁREA DE DANO (Hitbox)
+	# Isso impede que o sinal de 'body_entered' do Player dispare o dano
 	if hitbox_2.is_connected("body_entered", _on_hitbox_body_entered):
 		hitbox_2.disconnect("body_entered", _on_hitbox_body_entered)
+	
+	# Desativa as formas de colisão das áreas de dano, mas NÃO a principal do CharacterBody
 	$hitbox/CollisionShape2D.set_deferred("disabled", true)
 	for child in hitbox_2.get_children():
 		if child is CollisionShape2D or child is CollisionPolygon2D:
 			child.set_deferred("disabled", true)
 
-	set_collision_layer_value(1, true) 
-	set_collision_mask_value(1, true)
-	
+	# 4. VISUAL E PILOTO
 	var tween = create_tween()
 	tween.tween_property(sprite, "modulate", Color(0.3, 0.3, 0.3, 1), 0.1)
 	
@@ -161,9 +174,9 @@ func create_lose_boss():
 	get_parent().add_child(boss_scene)
 	boss_scene.global_position = global_position - Vector2(0, 30)
 	
-	# --- CORREÇÃO DA MÚSICA AQUI ---
+	# 5. MÚSICA
 	if has_node("/root/MusicPlayer"):
-		MusicPlayer.stop_boss_music() # Usando a função que já criamos no MusicPlayer
+		MusicPlayer.stop_boss_music()
 	
 	Globals.boss_defeated.emit()
 

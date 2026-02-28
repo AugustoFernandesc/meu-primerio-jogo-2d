@@ -73,7 +73,7 @@ size = Vector2(39, 183.5)
 script = ExtResource("1_tco1r")
 
 [node name="player" parent="." instance=ExtResource("1_3kscr")]
-position = Vector2(7798, -758)
+position = Vector2(81, 194)
 
 [node name="tiles" type="Node2D" parent="."]
 
