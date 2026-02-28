@@ -497,8 +497,6 @@ position = Vector2(7720, 103)
 [node name="levelend" parent="." instance=ExtResource("15_boiax")]
 position = Vector2(7902, 134)
 next_level = "tropic"
-level_name_display = "Tropic Heatware"
-next_chapter = 3
 
 [node name="tankboy" parent="." instance=ExtResource("23_xw4on")]
 position = Vector2(7989, 193)

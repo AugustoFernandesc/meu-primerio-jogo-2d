@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://8wi5ov5t345m"]
+[gd_scene load_steps=11 format=3 uid="uid://8wi5ov5t345m"]
 
 [ext_resource type="Script" uid="uid://by2bhopd8ua3n" path="res://scripts/rocket_cherry.gd" id="1_mjc4a"]
 [ext_resource type="Texture2D" uid="uid://c3a061bccnw3u" path="res://sprites/Sprite Pack 2/7 - Rocket Cherry/Flying (16 x 32).png" id="1_sf8fx"]
@@ -39,10 +39,13 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g8st4"]
-radius = 6.0
+radius = 7.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mjc4a"]
-size = Vector2(10, 4)
+size = Vector2(10, 3)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0crtj"]
+radius = 7.0
 
 [node name="rocket_cherry" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 4
@@ -54,7 +57,7 @@ animation = &"hurt"
 autoplay = "flying"
 
 [node name="collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 7)
+position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_g8st4")
 
 [node name="hitbox" type="Area2D" parent="." groups=["enemies"]]
@@ -62,7 +65,17 @@ position = Vector2(0, -1)
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_mjc4a")
+debug_color = Color(0.9765044, 0, 0.41494647, 0.41960785)
+
+[node name="hitbox2" type="Area2D" parent="." groups=["enemies"]]
+position = Vector2(0, -1)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox2"]
+position = Vector2(0, 7)
+shape = SubResource("CircleShape2D_0crtj")
 debug_color = Color(0.9765044, 0, 0.41494647, 0.41960785)
 
 [node name="ground_detector" type="RayCast2D" parent="."]

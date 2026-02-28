@@ -18,7 +18,9 @@ var first_time_in_level = true
 var total_coins_collected = 0
 var total_score_accumulated = 0
 
-signal boss_defeated
+# --- SINAIS ---
+signal boss_defeated         # Para liberar o Sushi/Portais
+signal boss_defeated_music   # ESPECÍFICO para o MusicPlayer voltar a música
 signal life_changed 
 
 func _process(delta: float) -> void:
@@ -33,12 +35,12 @@ func check_coin_to_life_conversion():
 		if player_hp < 5:
 			player_hp += 1
 			coins -= 15
-			life_changed.emit() # SINAL EMITIDO AQUI!
+			life_changed.emit()
 		elif player_life < 3:
 			player_life += 1
 			player_hp = 1
 			coins -= 15
-			life_changed.emit() # SINAL EMITIDO AQUI!
+			life_changed.emit()
 		else:
 			break
 
@@ -47,12 +49,12 @@ func check_score_to_life_conversion():
 		if player_hp < 5:
 			player_hp += 1
 			score -= 1000
-			life_changed.emit() # SINAL EMITIDO AQUI!
+			life_changed.emit()
 		elif player_life < 3:
 			player_life += 1
 			player_hp = 1
 			score -= 1000
-			life_changed.emit() # SINAL EMITIDO AQUI!
+			life_changed.emit()
 		else:
 			break
 

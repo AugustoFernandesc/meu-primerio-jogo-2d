@@ -73,7 +73,7 @@ size = Vector2(39, 183.5)
 script = ExtResource("1_tco1r")
 
 [node name="player" parent="." instance=ExtResource("1_3kscr")]
-position = Vector2(90, 183)
+position = Vector2(7798, -758)
 
 [node name="tiles" type="Node2D" parent="."]
 
@@ -168,7 +168,6 @@ limit_right = 8000
 [node name="levelend" parent="." instance=ExtResource("10_d4ph7")]
 position = Vector2(7884, -799)
 next_level = "forest"
-level_name_display = "Fossil Forest"
 
 [node name="coins" type="Node2D" parent="."]
 position = Vector2(716, -8)
@@ -253,7 +252,7 @@ position = Vector2(6178, -230)
 
 [node name="warning_sign" parent="." instance=ExtResource("15_mrqkn")]
 position = Vector2(1415, 2)
-lines = Array[String](["O sol das Grasslands ", "e implacavel...", "sinto minhas patas pesadas.", "Sem o frescor de um sorvete,", "minhas habilidades de...", "pulo duplo e agarrao", "estao 'derretidas'.", "Preciso me refrescar", "para seguir viagem!"])
+lines = Array[String](["O sol da Vivid Wilds ", "e implacavel...", "sinto minhas patas pesadas.", "Sem o frescor de um sorvete,", "minhas habilidades de...", "pulo duplo e agarrao", "estao 'derretidas'.", "Preciso me refrescar", "para seguir viagem!"])
 
 [node name="tutorial_sign" parent="." instance=ExtResource("20_xxt1f")]
 position = Vector2(158, 130)

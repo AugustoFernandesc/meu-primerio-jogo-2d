@@ -1,6 +1,5 @@
 extends Node
 
-# Dicionário com suas músicas
 var tracks = {
 	"grassland": preload("res://sons/grassland.ogg"),
 	"forest": preload("res://sons/forest.ogg"),
@@ -18,15 +17,19 @@ var current_world_track: String = ""
 
 func _ready() -> void:
 	current_p = p1
+	# Conectando ao sinal do Globals (certifique-se que o nome no Globals é boss_defeated)
 	if Globals.has_signal("boss_defeated"):
 		Globals.boss_defeated.connect(stop_boss_music)
 	Globals.life_changed.connect(_on_life_changed)
 
 func play_track(world_name: String):
 	if not tracks.has(world_name): return
-	# Se a música já está tocando, não faz nada
-	if current_p.stream == tracks[world_name] and current_p.playing: return
 	
+	# Se a música já estiver tocando, não faz nada
+	if current_p.stream == tracks[world_name] and current_p.playing:
+		return
+	
+	# Salva qual é a música do mundo (para poder voltar depois do boss)
 	if world_name != "boss":
 		current_world_track = world_name
 
@@ -35,13 +38,11 @@ func play_track(world_name: String):
 func _crossfade(new_stream: AudioStream, target_vol: float):
 	var next_p = p2 if current_p == p1 else p1
 	
-	# Prepara a nova música (Boss ou Mapa)
 	next_p.stream = new_stream
-	next_p.volume_db = -60.0 # Começa bem baixo mas audível
+	next_p.volume_db = -60.0
 	next_p.play()
 	
 	var tween = create_tween().set_parallel(true)
-
 	tween.tween_property(current_p, "volume_db", -80.0, 1.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(next_p, "volume_db", target_vol, 1.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	
@@ -64,6 +65,8 @@ func start_boss_music():
 func stop_boss_music():
 	if current_world_track != "":
 		play_track(current_world_track)
+	else:
+		stop_all()
 
 func stop_all():
 	if p1: p1.stop()

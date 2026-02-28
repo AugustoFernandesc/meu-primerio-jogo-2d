@@ -120,9 +120,17 @@ func dead_state(_delta):
 
 func sleeping_state(_delta):
 	velocity.x = 0
-	# Lógica para ACORDAR: se qualquer detector bater, vai para walk
+	# Força os detectores a olharem o mundo de novo
+	player_detector.force_raycast_update()
+	player_detector_2.force_raycast_update()
+	
 	if player_detector.is_colliding() or player_detector_2.is_colliding():
-		go_to_walk_state()
+		# Só acorda se quem ele bateu for o Player
+		var c1 = player_detector.get_collider()
+		var c2 = player_detector_2.get_collider()
+		
+		if (c1 and c1.is_in_group("player")) or (c2 and c2.is_in_group("player")):
+			go_to_walk_state()
 
 func take_damage():
 	life -= 1

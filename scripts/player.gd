@@ -413,24 +413,15 @@ func _on_hitbox_body_exited(body: Node2D) -> void:
 func hit_enemy(area: Area2D):
 	var enemy = area.get_parent()
 	var player_bottom = global_position.y
-	
-	# Usamos um offset de -5 para ser justo com o tamanho do Octi
 	var enemy_top = area.global_position.y - 5 
-	
 	var sinking_in_water = is_in_water and velocity.y > 5
 	var normal_falling = not is_in_water and velocity.y > 0
-	
-	# --- AGORA CHECAMOS PELO NOME OCTI ---
 	var is_octi = enemy.name.contains("octi")
-	
 	var can_kill = false
-	
 	if is_octi:
-		# Regra de elite para o Octi: tem que estar acima dele e caindo
 		if (sinking_in_water or normal_falling) and player_bottom < enemy_top:
 			can_kill = true
 	else:
-		# Regra geral para as Cherries e outros: encostou caindo, morreu
 		if normal_falling or sinking_in_water:
 			can_kill = true
 
@@ -473,6 +464,4 @@ func _on_reload_timer_timeout() -> void:
 		get_tree().reload_current_scene()
 	else:
 		Globals.reset_game()
-		# Se quiser que o Game Over tire ele do Checkpoint:
-		# Globals.has_checkpoint = false
 		get_tree().change_scene_to_file("res://ui/game_over.tscn")

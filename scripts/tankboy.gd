@@ -4,15 +4,13 @@ const BOMB = preload("uid://c6segkipgnt5")
 const MISSILE = preload("uid://bq058f8rijoug")
 
 @export_group("Phase Settings")
-# Adicionei ': int = 1' para garantir que nunca seja nulo (Nil)
 @export var boss_phase: int = 1 
 @export var boss_instance : PackedScene
 
-# Inicializamos com 0 para o setup_boss_difficulty definir os valores reais
 var health: int = 3
 var max_missiles: int = 4
 var max_bombs: int = 3
-var current_speed: float = 13500.0
+var current_speed: float = 14000.0
 
 var direction: int = -1
 var turn_count: int = 0
@@ -32,15 +30,11 @@ var is_dead: bool = false
 @onready var hitbox_2: Area2D = $hitbox2
 
 func _ready() -> void:
-	# Garante que o setup rode ANTES de qualquer processamento físico
 	setup_boss_difficulty()
 	set_physics_process(false)
 
 func setup_boss_difficulty():
-	# Proteção extra: se por algum motivo for nulo, vira 1
 	if boss_phase == null: boss_phase = 1
-	
-	# Agora a conta está segura
 	health = 2 + boss_phase 
 	max_missiles = 3 + boss_phase 
 	max_bombs = 2 + boss_phase 
@@ -104,7 +98,7 @@ func take_damage():
 	
 	if health <= 0:
 		is_dead = true
-		state_machine.travel("death") # Toca a animação de abrir o tanque
+		state_machine.travel("death")
 		await get_tree().create_timer(0.2).timeout
 		create_lose_boss()
 	else:
@@ -129,9 +123,7 @@ func start_damage_flash():
 
 func launch_missile():
 	var missile_instance = MISSILE.instantiate()
-	
-	missile_instance.SPEED = 200.0 + (boss_phase * 40.0)
-	
+	missile_instance.SPEED = 210.0 + (boss_phase * 40.0)
 	add_sibling(missile_instance)
 	missile_instance.global_position = missile_point.global_position
 	missile_instance.set_direction(direction)
@@ -142,50 +134,36 @@ func throw_bomb():
 	var bomb_instance = BOMB.instantiate()
 	add_sibling(bomb_instance)
 	bomb_instance.global_position = bomb_point.global_position
-	
-	# Tunando a bomba: 
-	# Aumentei a base da arena e os multiplicadores de força
 	var arena_width = 220.0 + ((boss_phase - 1) * 40.0) 
-	
-	# Impulse_x maior para ela cruzar a tela com velocidade
 	var impulse_x = randi_range(direction * (arena_width * 0.7), direction * (arena_width * 1.1))
-	
-	# Impulse_y ajustado para um arco mais bonito (mais alto e longe)
 	var impulse_y = randi_range(-250, -320)
-	
 	bomb_instance.apply_impulse(Vector2(impulse_x, impulse_y))
 	$bomb_cooldown.start()
 	bomb_count += 1
 
 func create_lose_boss():
 	is_dead = true
-	# Em vez de desligar o physics_process, vamos apenas zerar a velocidade
-	# Isso ajuda a manter o corpo "vivo" para o sistema de colisão do Player
 	velocity = Vector2.ZERO
-	
-	# Desconecta o sinal de dano para evitar erros
 	if hitbox_2.is_connected("body_entered", _on_hitbox_body_entered):
 		hitbox_2.disconnect("body_entered", _on_hitbox_body_entered)
-	
-	# Desativa as hitboxes de DANO (as que fazem o pinguim sofrer)
 	$hitbox/CollisionShape2D.set_deferred("disabled", true)
 	for child in hitbox_2.get_children():
 		if child is CollisionShape2D or child is CollisionPolygon2D:
 			child.set_deferred("disabled", true)
-	
-	# IMPORTANTE: Garante que a colisão principal do tanque esteja ATIVA e na camada certa
-	# Se o seu player está na layer 1, o tanque morto precisa estar na layer 1
+
 	set_collision_layer_value(1, true) 
 	set_collision_mask_value(1, true)
 	
-	# Muda a cor para cinza (destruído)
 	var tween = create_tween()
 	tween.tween_property(sprite, "modulate", Color(0.3, 0.3, 0.3, 1), 0.1)
 	
-	# Criar piloto
 	var boss_scene = boss_instance.instantiate()
 	get_parent().add_child(boss_scene)
 	boss_scene.global_position = global_position - Vector2(0, 30)
+	
+	# --- CORREÇÃO DA MÚSICA AQUI ---
+	if has_node("/root/MusicPlayer"):
+		MusicPlayer.stop_boss_music() # Usando a função que já criamos no MusicPlayer
 	
 	Globals.boss_defeated.emit()
 
@@ -210,7 +188,6 @@ func _on_player_detector_body_entered(_body: Node2D) -> void:
 		set_physics_process(true)
 		if has_node("/root/MusicPlayer"):
 			MusicPlayer.start_boss_music()
-
 
 func _on_visible_on_screen_enabler_2d_screen_entered() -> void:
 	set_physics_process(true)
