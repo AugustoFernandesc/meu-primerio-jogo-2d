@@ -10,7 +10,7 @@ const MISSILE = preload("uid://bq058f8rijoug")
 var health: int = 3
 var max_missiles: int = 4
 var max_bombs: int = 3
-var current_speed: float = 14000.0
+var current_speed: float = 14500.0
 
 var direction: int = -1
 var turn_count: int = 0
@@ -38,7 +38,7 @@ func setup_boss_difficulty():
 	health = 2 + boss_phase 
 	max_missiles = 3 + boss_phase 
 	max_bombs = 2 + boss_phase 
-	current_speed = 13500.0 + (boss_phase * 1000.0)
+	current_speed = 14500.0 + (boss_phase * 1000.0)
 
 func _physics_process(delta: float) -> void:
 	if is_dead: return
@@ -123,7 +123,7 @@ func start_damage_flash():
 
 func launch_missile():
 	var missile_instance = MISSILE.instantiate()
-	missile_instance.SPEED = 210.0 + (boss_phase * 40.0)
+	missile_instance.SPEED = 215.0 + (boss_phase * 40.0)
 	add_sibling(missile_instance)
 	missile_instance.global_position = missile_point.global_position
 	missile_instance.set_direction(direction)
@@ -144,6 +144,9 @@ func throw_bomb():
 func create_lose_boss():
 	is_dead = true
 	velocity = Vector2.ZERO
+	
+	Globals.score += 300
+	Globals.total_score_accumulated += 300
 	
 	# 1. DESLIGA O DETECTOR (Para a música não bugar ao pular)
 	if has_node("player_detector"):

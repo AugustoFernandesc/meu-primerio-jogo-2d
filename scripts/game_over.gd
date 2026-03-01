@@ -3,8 +3,9 @@ extends Control
 @onready var game_over_sfx: AudioStreamPlayer = $game_over_sfx
 
 func _ready() -> void:
-	if MusicPlayer.has_method("stop_all"):
-		MusicPlayer.stop_all()
+	if MusicPlayer:
+		MusicPlayer.stop_all_music()
+	
 	game_over_sfx.play()
 
 func _on_restart_btn_pressed() -> void:

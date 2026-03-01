@@ -29,8 +29,8 @@ func _on_resume_pressed() -> void:
 	resume_game()
 
 func _on_quit_pressed() -> void:
-	if has_node("/root/Music"): 
-		get_node("/root/Music").stop_all_music()
+	if MusicPlayer:
+		MusicPlayer.stop_all_music()
 	
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://ui/main_menu.tscn")

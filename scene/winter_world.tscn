@@ -72,7 +72,7 @@ size = Vector2(20, 162.5)
 script = ExtResource("1_4uvnb")
 
 [node name="player" parent="." instance=ExtResource("1_8ekk4")]
-position = Vector2(24, 311)
+position = Vector2(21, 311)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -334,7 +334,7 @@ collision_layer = 16
 collision_mask = 1
 
 [node name="trex10" parent="enemies" instance=ExtResource("27_3fmyp")]
-position = Vector2(4861, 144)
+position = Vector2(4840, 144)
 collision_layer = 16
 collision_mask = 1
 

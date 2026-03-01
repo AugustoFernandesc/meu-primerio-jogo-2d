@@ -63,17 +63,21 @@ func _on_life_changed() -> void:
 	var sfx = AudioStreamPlayer.new()
 	add_child(sfx)
 	sfx.stream = tracks["extra_life"]
+	sfx.volume_db = -15.0 
 	sfx.play()
 	sfx.finished.connect(sfx.queue_free)
 
 func stop_all_music():
-	var active_tweens = get_tree().get_processed_tweens()
-	for t in active_tweens:
-		t.kill()
-	if p1: 
+	var tweens = get_tree().get_processed_tweens()
+	for t in tweens:
+		if t.is_valid():
+			t.kill()
+	
+	if p1:
 		p1.stop()
-		p1.volume_db = -30.0
-	if p2: 
+		p1.stream = null
+	if p2:
 		p2.stop()
-		p2.volume_db = -30.0
+		p2.stream = null
+	
 	current_world_track = ""

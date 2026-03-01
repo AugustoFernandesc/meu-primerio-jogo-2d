@@ -21,7 +21,6 @@ func _on_impact(target):
 	if target.is_in_group("player") or target.name == "player":
 		if target.has_method("take_damage"):
 			target.take_damage()
-	
 	queue_free()
 
 func _on_lethal_area_body_entered(body: Node2D) -> void:
@@ -34,3 +33,7 @@ func set_direction(dir):
 		$anim.flip_h = (dir < 0)
 	elif has_node("sprite"):
 		$sprite.flip_h = (dir < 0)
+
+
+func _on_self_destruction_timer_timeout() -> void:
+	queue_free()
