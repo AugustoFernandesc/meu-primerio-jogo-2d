@@ -4,7 +4,7 @@ extends CanvasLayer
 @onready var label_coins: Label = $VBoxContainer/Label_coin
 @onready var label_time: Label = $VBoxContainer/Label_time
 @onready var label_score: Label = $VBoxContainer/Label_score
-@onready var btn_menu: Button = $btn_menu
+@onready var btn_menu: Button = $VBoxContainer/btn_menu
 
 func _ready():
 	label_thanks.visible = false
@@ -58,5 +58,7 @@ func format_time(time_seconds: float) -> String:
 		return "%02d:%02d" % [minutes, seconds]
 
 func _on_quit_pressed() -> void:
+	if has_node("/root/MusicPlayer"):
+		MusicPlayer.stop_all_music()
 	Globals.reset_game()
 	get_tree().change_scene_to_file("res://ui/main_menu.tscn")

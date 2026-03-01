@@ -72,7 +72,7 @@ size = Vector2(20, 162.5)
 script = ExtResource("1_4uvnb")
 
 [node name="player" parent="." instance=ExtResource("1_8ekk4")]
-position = Vector2(23, 312)
+position = Vector2(24, 311)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

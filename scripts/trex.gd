@@ -18,7 +18,6 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	# Gerencia os estados
 	match(current_state):
 		enemy_state.patrol: 
 			patrol_state()
@@ -30,7 +29,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func patrol_state():
+	animation_player.speed_scale = 1.0 
 	animation_player.play("running")
+	
 	if is_on_wall() or not ground_detector.is_colliding():
 		flip_enemy()
 		
@@ -40,8 +41,10 @@ func patrol_state():
 		current_state = enemy_state.attack
 
 func attack_state():
+	animation_player.speed_scale = 3.5 
 	animation_player.play("shooting")
-	velocity.x = 0 # Para de andar para atirar
+	velocity.x = 0 
+	
 	if not player_detector.is_colliding():
 		current_state = enemy_state.patrol
 
@@ -51,24 +54,34 @@ func take_damage():
 	current_state = enemy_state.hurt
 	health_point -= 1
 	apply_damage_tween()
+	
+	animation_player.speed_scale = 1.0
+	
 	if health_point <= 0:
+		Globals.score += 150
+		Globals.total_score_accumulated += 150
 		animation_player.play("hurt")
 		await animation_player.animation_finished
 		queue_free()
 	else:
 		animation_player.play("hurt")
 		await animation_player.animation_finished
-		current_state = enemy_state.patrol
+		
+		if Globals.player:
+			var player_dir = sign(Globals.player.global_position.x - global_position.x)
+			if player_dir != direction and player_dir != 0:
+				flip_enemy()
+		
+		current_state = enemy_state.attack
 
 func flip_enemy():
 	direction *= -1
 	sprite.scale.x *= -1
-	player_detector.scale.x *= -1
+	player_detector.target_position.x *= -1 
 	fireball_spawn_point.position.x *= -1
 
 func spawn_fireball():
 	var new_fireball = FIREBALL.instantiate()
-	# Usa a direção do dragão para a bola de fogo
 	new_fireball.set_direction(direction)
 	add_sibling(new_fireball)
 	new_fireball.global_position = fireball_spawn_point.global_position

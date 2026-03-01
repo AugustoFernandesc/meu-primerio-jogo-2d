@@ -1,36 +1,36 @@
 extends CanvasLayer
 
-@onready var resume: Button = $menu_holder/resume
+@onready var resume_button: Button = $menu_holder/resume
 
 func _ready() -> void:
 	visible = false
 
-# Essa função mágica detecta eventos do sistema (como minimizar o app)
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT or what == NOTIFICATION_APPLICATION_FOCUS_OUT:
-		# Se o jogo não estiver no menu principal e o app for minimizado, pausa!
-		pausar_jogo()
+		pause_game()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("quit"):
 		if not visible:
-			pausar_jogo()
+			pause_game()
 		else:
-			despausar_jogo()
+			resume_game()
 
-func pausar_jogo() -> void:
+func pause_game() -> void:
 	visible = true
 	get_tree().paused = true
-	# Dica: se tiver botões, é bom dar um grab_focus no resume para facilitar
-	resume.grab_focus()
+	resume_button.grab_focus()
 
-func despausar_jogo() -> void:
+func resume_game() -> void:
 	get_tree().paused = false
 	visible = false
 
 func _on_resume_pressed() -> void:
-	despausar_jogo()
+	resume_game()
 
 func _on_quit_pressed() -> void:
+	if has_node("/root/Music"): 
+		get_node("/root/Music").stop_all_music()
+	
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://ui/main_menu.tscn")

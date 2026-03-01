@@ -16,6 +16,7 @@ var current_world_track: String = ""
 
 func _ready() -> void:
 	current_p = p1
+	Globals.life_changed.connect(_on_life_changed)
 
 func play_track(world_name: String):
 	if not tracks.has(world_name): return
@@ -48,6 +49,7 @@ func _get_volume(world_name: String) -> float:
 		"tropic": return -15.0
 		"winter_world": return -30.0
 		"boss": return -30.0
+		"extra_life": return -15.0
 	return 0.0
 
 func start_boss_music():
@@ -63,3 +65,15 @@ func _on_life_changed() -> void:
 	sfx.stream = tracks["extra_life"]
 	sfx.play()
 	sfx.finished.connect(sfx.queue_free)
+
+func stop_all_music():
+	var active_tweens = get_tree().get_processed_tweens()
+	for t in active_tweens:
+		t.kill()
+	if p1: 
+		p1.stop()
+		p1.volume_db = -30.0
+	if p2: 
+		p2.stop()
+		p2.volume_db = -30.0
+	current_world_track = ""

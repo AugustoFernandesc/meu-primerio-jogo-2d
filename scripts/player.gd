@@ -444,16 +444,15 @@ func hit_enemy(area: Area2D):
 		go_to_knock_back_state(Vector2(push_direction * 200, vertical_push))
 
 func hit_lethal_area(area: Area2D):
+	if status == player_state.dead or is_invincible: 
+		return 
 	if area:
 		var difference = global_position.x - area.global_position.x
-		var push_direction = 0
-		if difference > 0:
-			push_direction = 1 
-		else:
-			push_direction = -1
+		var push_direction = 1 if difference > 0 else -1
 		go_to_knock_back_state(Vector2(push_direction * 250, -200))
-	else:
-		go_to_knock_back_state(Vector2(0, -200))
+		var parent = area.get_parent()
+		if parent and parent.has_method("_on_impact"):
+			parent._on_impact(self)
 
 func _on_reload_timer_timeout() -> void:
 	Globals.player_life -= 1
